@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head><title>Query Rides</title></h:head>
+<h:body>
+<h:form>
+<h3>Kontsultatu bidaiak</h3>
+<table>
+<tr>
+<td>Nondik:</td>
+<td>
+<p:selectOneMenu id="nondik" value="#{query.departCity}" action="#{query.refresh}" required="true"
+                 requiredMessage="[i] Aukera baliogabea.">
+    <f:selectItem itemLabel="-- Aukeratu --" itemValue="" noSelectionOption="true" />
+    <f:selectItems value="#{query.departCities}" var="x"
+                   itemLabel="#{x}" itemValue="#{x}" />
+    <p:ajax event="change"
+            listener="#{query.refresh}"
+            update="nora" />
+</p:selectOneMenu>
+<h:message for="nondik" style="color:red" />
+</td>
+</tr>
+<br></br>
+<br></br>
+<tr>
+<td>Nora:</td>
+<td>
+<p:selectOneMenu id="nora" value="#{query.destCity}" required="true"
+                 requiredMessage="[i] Aukera baliogabea.">
+    <f:selectItem itemLabel="-- Aukeratu --" itemValue="" noSelectionOption="true" />
+    <f:selectItems value="#{query.destCities}" var="x"
+                   itemLabel="#{x}" itemValue="#{x}" />
+     <p:ajax event="valueChange" listener="#{query.refresh}" update="nora" />
+</p:selectOneMenu>
+<h:message for="nora" style="color:red" />
+</td>
+</tr>
+
+<tr>
+<td>Data:</td>
+<td><p:calendar id="data" value="#{query.data}" required="true" requiredMessage="[i] Ezin da hutsa izan." navigator="false" mode="popup" mindate="#{query.bihar}">
+
+</p:calendar></td>
+
+</tr>
+</table>
+<p:commandButton value="Bilatu" actionListener="#{query.getRides}" update="@form" />
+<p>
+<h:commandButton value="Itzuli" action="#{choice.itzuli}" immediate="true"/>
+</p>
+
+
+
+<p:dataTable id="taula" value="#{query.ridesList}" var="r" 
+             emptyMessage="Ez dago bidaiarik baldintza horiekin.">
+
+    <p:column headerText="Noiz">
+        #{r.date}
+    </p:column>
+    
+    <p:column headerText="Nondik">
+        #{r.froma}
+    </p:column>
+
+    <p:column headerText="Nora">
+        #{r.toa}
+    </p:column>
+
+    <p:column headerText="Eserleku libreak">
+        #{r.nPlaces}
+    </p:column>
+    
+     <p:column headerText="Prezioa">
+        #{r.price}
+    </p:column>
+    
+    <p:column headerText="Gidaria">
+        #{r.driver.email}
+    </p:column>
+
+</p:dataTable>
+</h:form>
+</h:body>
+</f:view>
+</html>
