@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head><title>Kontua sortu</title></h:head>
+<h:body>
+<h:form>
+<h3>Kontua sortu</h3>
+<table>
+<tr>
+<td>Posta:</td>
+<td><h:inputText id="posta" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{signIn.posta}" validatorMessage="[i] Posta baliogabea.">
+<f:validateRegex pattern="^[A-Za-z0-9.]+@[A-Za-z0-9.]+\.[A-Za-z]{1,}$"/>
+</h:inputText></td>
+<td><h:message for="posta" style="color:red" /></td>
+</tr>
+<tr>
+<td>Pasahitza:</td>
+<td><h:inputText id="pasahitza" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{signIn.pasahitza}"
+				 validatorMessage="[i] Pasahitzak gutxienez 8 karaktere izan behar ditu.">
+    <f:validateLength minimum="8" />
+</h:inputText>
+
+<h:message for="pasahitza" style="color:red" />
+</td>
+</tr>
+</table>
+<br></br>
+<p:selectOneRadio id="rol" value="#{signIn.mota}" required="true" requiredMessage="[i] Aukeratu kontu mota bat.">
+    <f:selectItem itemLabel="Gidaria" itemValue="GIDARIA"/>
+    <f:selectItem itemLabel="Bidaiaria" itemValue="BIDAIARIA"/>
+</p:selectOneRadio>
+
+<h:message for="rol" style="color:red"/>
+
+<br/><br/>
+<tr>
+<p:commandButton value="Erregistratu" actionListener="#{signIn.createRide}" update="@form" />
+</tr>
+<tr>
+<p>
+<h:commandButton value="Kontua duzu jada?" action="#{signIn.login}" immediate="true"/>
+</p>
+</tr>
+ <h:messages id="msgs" globalOnly="true" style="color:green;" />
+</h:form>
+</h:body>
+</f:view>
+</html>
