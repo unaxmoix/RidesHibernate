@@ -6,16 +6,16 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 	version="3.0">
 
 	<navigation-rule>
-		<display-name>menu.xhtml</display-name>
-		<from-view-id>/menu.xhtml</from-view-id>
+		<display-name>gidariMenu.xhtml</display-name>
+		<from-view-id>/gidariMenu.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>create</from-outcome>
 			<to-view-id>/createRide.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>menu.xhtml</display-name>
-		<from-view-id>/menu.xhtml</from-view-id>
+		<display-name>gidariMenu.xhtml</display-name>
+		<from-view-id>/gidariMenu.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>query</from-outcome>
 			<to-view-id>/queryRides.xhtml</to-view-id>
@@ -25,16 +25,113 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 		<display-name>createRide.xhtml</display-name>
 		<from-view-id>/createRide.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>menu</from-outcome>
-			<to-view-id>/menu.xhtml</to-view-id>
+			<from-outcome>gidarimenu</from-outcome>
+			<to-view-id>/gidariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>gidariMenu.xhtml</display-name>
+		<from-view-id>/gidariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>bidaiariMenu.xhtml</display-name>
+		<from-view-id>/bidaiariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>bidaiariMenu.xhtml</display-name>
+		<from-view-id>/bidaiariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>tranat</from-outcome>
+			<to-view-id>/kontsultatuTranaT.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>gidariMenu.xhtml</display-name>
+		<from-view-id>/gidariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>tranad</from-outcome>
+			<to-view-id>/kontsultatuTranaD.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>bidaiariMenu.xhtml</display-name>
+		<from-view-id>/bidaiariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>diruat</from-outcome>
+			<to-view-id>/sartuDirua.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>sartuDirua.xhtml</display-name>
+		<from-view-id>/sartuDirua.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>itzuli</from-outcome>
+			<to-view-id>/bidaiariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>ateraDirua.xhtml</display-name>
+		<from-view-id>/ateraDirua.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>itzuli</from-outcome>
+			<to-view-id>/gidariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>kontsultatuTranaD.xhtml</display-name>
+		<from-view-id>/kontsultatuTranaD.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>gidarimenu</from-outcome>
+			<to-view-id>/gidariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>kontsultatuTranaT.xhtml</display-name>
+		<from-view-id>/kontsultatuTranaT.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>bidaiarimenu</from-outcome>
+			<to-view-id>/bidaiariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>gidariMenu.xhtml</display-name>
+		<from-view-id>/gidariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>diruaD</from-outcome>
+			<to-view-id>/ateraDirua.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>gidarimenu</from-outcome>
+			<to-view-id>/gidariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>bidaiarimenu</from-outcome>
+			<to-view-id>/bidaiariMenu.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<display-name>queryRides.xhtml</display-name>
 		<from-view-id>/queryRides.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>menu</from-outcome>
-			<to-view-id>/menu.xhtml</to-view-id>
+			<from-outcome>gidarimenu</from-outcome>
+			<to-view-id>/gidariMenu.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

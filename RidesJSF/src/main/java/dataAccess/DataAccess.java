@@ -20,6 +20,8 @@ import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Driver;
 import domain.Ride;
+import domain.Transaction;
+import domain.Traveler;
 import eredua.JPAUtil;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
@@ -238,7 +240,86 @@ public class DataAccess  {
 		  }
 	 	return res;
 	}
+	public List<Transaction> lortuTransakT(Traveler t){
+		db.getTransaction().begin();
+		
+		Traveler traveler = db.find(Traveler.class, t.getEmail());
+		List<Transaction> listTansak=traveler.getTransactions();
+		 
+		db.getTransaction().commit();
+		
+		return listTansak;
+		}
+	public List<Transaction> lortuTransakD(Driver t){
+		db.getTransaction().begin();
+		Driver driver = db.find(Driver.class, t.getEmail());
+		List<Transaction> listTansak=driver.getTransactions();
+		db.getTransaction().commit();
+		return listTansak;
+		}
+	public void addTransaction(Transaction trans, Traveler t) {
+		Traveler traveler = badagoTraveler(t.getEmail());
+		db.getTransaction().begin();
+		traveler.addTransaction(trans);
+		db.getTransaction().commit();
+	}
+
+	public void addTransaction(Transaction trans, Driver d) {
+		Driver driver = badagoDriver(d.getEmail());
+		db.getTransaction().begin();
+		driver.addTransaction(trans);
+		db.getTransaction().commit();
+	}
+	public void sartuDirua(double money, Driver d) {
+		Driver driver = badagoDriver(d.getEmail());
+		db.getTransaction().begin();
+		driver.addMoney(money);
+		db.getTransaction().commit();
+	}
+
+	public void sartuDirua(double money, Traveler t) {
+		Traveler traveler = badagoTraveler(t.getEmail());
+		db.getTransaction().begin();
+		traveler.addMoney(money);
+		db.getTransaction().commit();
+	}
 	
+	public Driver badagoDriver(String d) {
+		
+		Driver ema;
+		db.getTransaction().begin();
+		ema = db.find(Driver.class, d);
+		db.getTransaction().commit();
+		
+		return ema;
+	}
+
+	public Traveler badagoTraveler(String t) {
+		Traveler ema;
+		db.getTransaction().begin();
+		ema = db.find(Traveler.class, t);
+		db.getTransaction().commit();
+		return ema;
+	}
+	public void createDriver(Driver d) {
+		// try{
+		db.getTransaction().begin();
+		db.persist(d);
+		db.getTransaction().commit();
+		// } catch (Exception e) {
+		// throw new EmailAlreadyExistsException("Email already in use");
+		// }
+	}
+
+	public void createTraveler(Traveler t) {
+		// try{
+		db.getTransaction().begin();
+		db.persist(t);
+		db.getTransaction().commit();
+		// } catch (Exception e) {
+		// throw new EmailAlreadyExistsException("Email already in use");
+		// }
+	}
 
 public void open(){
 		

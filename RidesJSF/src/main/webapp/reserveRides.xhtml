@@ -6,7 +6,7 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Kontsultatu bidaiak</title></h:head>
+<h:head><title>Query Rides</title></h:head>
 <h:body>
 <h:form>
 <h3>Kontsultatu bidaiak</h3>
@@ -79,11 +79,10 @@ xmlns:p="http://primefaces.org/ui">
      <p:column headerText="Prezioa">
         #{r.price}
     </p:column>
-     
+    
     <p:column headerText="Gidaria">
         #{r.driver.email}
     </p:column>
-   
 
 </p:dataTable>
 </h:form>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head><title>Kontsultatu transakzioak</title></h:head>
+<h:body>
+<h:outputText value="#{traveler.posta}"/>
+<br></br>
+
+<h:outputText value="#{traveler.money}">
+    <f:convertNumber type="number" maxFractionDigits="2" />
+</h:outputText>€
+<h:form>
+<h3>Kontsultatu transakzioak</h3>
+
+<p>
+<h:commandButton value="Itzuli" action="#{traveler.itzuli}" immediate="true"/>
+</p>
+
+
+
+<p:dataTable id="taula" value="#{tranat.transak}" var="tr" 
+             emptyMessage="Ez dago transakziorik.">
+
+    <p:column headerText="Data">
+        #{tr.date}
+    </p:column>
+    
+     <p:column headerText="Zenbatekoa">
+    <h:outputText value="#{tr.money}">
+        <f:convertNumber type="number" minFractionDigits="2" maxFractionDigits="2" />
+    </h:outputText>€
+	</p:column>
+
+    <p:column headerText="Guztira">
+    <h:outputText value="#{tr.totalMoney}">
+        <f:convertNumber type="number" minFractionDigits="2" maxFractionDigits="2" />
+    </h:outputText>€
+	</p:column>
+    <p:column headerText="Kontzeptua">
+        #{tr.concept}
+    </p:column>
+    
+   
+    
+   
+
+</p:dataTable>
+</h:form>
+</h:body>
+</f:view>
+</html>

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import businessLogic.BLFacade;
+import domain.Driver;
 import domain.Ride;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
@@ -14,7 +15,7 @@ import jakarta.inject.Named;
 @SessionScoped
 
 public class QueryBean implements Serializable{
-	
+	private Driver driver;
 	private String departCity;
 	private List<String> departCities;
 	private List<String> destCities;
@@ -24,6 +25,7 @@ public class QueryBean implements Serializable{
 	private Date bihar;
 	private List<Ride> ridesList;
 	public QueryBean() {
+		driver=LoginBean.getDd();
 		Calendar c = Calendar.getInstance();
 		 c.add(Calendar.DAY_OF_YEAR, 1);  
 		 this.bihar= c.getTime();
@@ -83,7 +85,10 @@ public class QueryBean implements Serializable{
 	}
 	
 	public void getRides() {
-		ridesList= facadeBL.getRides(departCity, destCity, data);
+		
+		Driver dd= facadeBL.badagoDriver(driver.getEmail());
+		ridesList= dd.getRides();
+		
 	}
 
 	public void setBihar(Date bihar) {

@@ -13,38 +13,38 @@ xmlns:p="http://primefaces.org/ui">
 <table>
 <tr>
 <td>Posta:</td>
-<td><h:inputText id="posta" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{create.nondik}" validatorMessage="[i] Posta baliogabea.">
+<td><h:inputText id="posta" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{login.posta}" validatorMessage="[i] Posta baliogabea.">
 <f:validateRegex pattern="^[A-Za-z0-9.]+@[A-Za-z0-9.]+\.[A-Za-z]{1,}$"/>
 </h:inputText></td>
 <td><h:message for="posta" style="color:red" /></td>
 </tr>
 <tr>
 <td>Pasahitza:</td>
-<td><h:inputText id="pasahitza" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{create.nora}"  validatorMessage="[i] Pasahitza baliogabea.">
-<f:validateRegex pattern="^(([a-z]|[A-Z])+[0-9]?)$"/>
-</h:inputText>
+<td><h:inputSecret  id="pasahitza" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{login.pasahitza}"  validatorMessage="[i] Pasahitza baliogabea.">
+
+</h:inputSecret>
 <h:message for="pasahitza" style="color:red" />
 </td>
 </tr>
 </table>
 <br></br>
-<p:selectOneRadio id="rol" value="#{create.nondik}" required="true" requiredMessage="[i] Aukeratu kontu mota bat.">
-    <f:selectItem itemLabel="Gidaria" itemValue="GIDARIA"/>
-    <f:selectItem itemLabel="Bidaiaria" itemValue="BIDAIARIA"/>
+<p:selectOneRadio id="rol" value="#{login.mota}" required="true" requiredMessage="[i] Aukeratu kontu mota bat.">
+    <f:selectItem itemLabel="Gidaria" itemValue="Gidaria"/>
+    <f:selectItem itemLabel="Bidaiaria" itemValue="Bidaiaria"/>
 </p:selectOneRadio>
 
 <h:message for="rol" style="color:red"/>
 
 <br/><br/>
 <tr>
-<p:commandButton value="Saioa hasi" actionListener="#{create.createRide}" update="@form" />
+<p:commandButton value="Saioa hasi" action="#{login.login}" update="@form" />
 </tr>
 <tr>
 <p>
 <h:commandButton value="Ez duzu konturik?" action="#{login.signIn}" immediate="true"/>
 </p>
 </tr>
- <h:messages id="msgs" globalOnly="true" style="color:green;" />
+ <h:messages id="msgs" globalOnly="true" style="color:red;" />
 </h:form>
 </h:body>
 </f:view>

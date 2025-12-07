@@ -7,13 +7,27 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
 <h:head><title>Menua</title></h:head>
+
 <h:body>
+<h:outputText value="#{traveler.posta}"/> 
+<br></br>
+<h:outputText value="#{traveler.money}">
+    <f:convertNumber type="number" maxFractionDigits="2" />
+</h:outputText>€     
+
 <h:form>
 <h3>Aukeratu egitekoa:</h3>
 <p>
 <h:commandButton value="Sortu bidaia" action="#{create.create}"/>
 <h:commandButton value="Kontsultatu bidaiak" action="#{query.query}" />
+<h:commandButton value="Sartu dirua" action="#{diruat.diruat}" />
+<h:commandButton value="Kontsultatu transakzioak" action="#{tranat.tranat}" />
 </p>
+<tr>
+<p>
+<h:commandButton value="Saioa itxi" action="#{login.logout}" immediate="true"/>
+</p>
+</tr>
 </h:form>
 </h:body>
 </f:view>

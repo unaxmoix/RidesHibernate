@@ -2,11 +2,12 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.Vector;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlIDREF;
 
 @Entity
 public class Traveler implements Serializable {
@@ -21,6 +22,11 @@ public class Traveler implements Serializable {
 	private String password;
 	private String name;
 	private double money;
+
+	
+
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	private List<Transaction> transactions = new Vector<Transaction>();
 	
 
 
@@ -89,6 +95,16 @@ public class Traveler implements Serializable {
 	public void addMoney(double mon) {
 		this.money+=mon;
 	}
+	public void addTransaction(Transaction trans) {
+		this.transactions.add(trans);
+	}
 
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
 	
 }

@@ -10,12 +10,17 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 <class>domain.Driver</class>
  <class>domain.Traveler</class>
  <class>domain.Ride</class>
-
+<class>domain.Transaction</class>
+<class>domain.Erreserba</class>
 <properties>
  <property name="javax.persistence.jdbc.driver"
 value="org.mariadb.jdbc.Driver" />
  <property name="javax.persistence.jdbc.traveler"
 value="org.mariadb.jdbc.Traveler" />
+ <property name="javax.persistence.jdbc.transaction"
+value="org.mariadb.jdbc.Transaction" />
+ <property name="javax.persistence.jdbc.erreserba"
+value="org.mariadb.jdbc.Erreserba" />
  <property name="javax.persistence.jdbc.ride"
 value="org.mariadb.jdbc.Ride" />
  <property name="javax.persistence.jdbc.url"

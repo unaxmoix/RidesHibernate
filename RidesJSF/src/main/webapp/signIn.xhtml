@@ -20,10 +20,10 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 <tr>
 <td>Pasahitza:</td>
-<td><h:inputText id="pasahitza" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{signIn.pasahitza}"
+<td><h:inputSecret id="pasahitza" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{signIn.pasahitza}"
 				 validatorMessage="[i] Pasahitzak gutxienez 8 karaktere izan behar ditu.">
     <f:validateLength minimum="8" />
-</h:inputText>
+</h:inputSecret>
 
 <h:message for="pasahitza" style="color:red" />
 </td>
@@ -31,15 +31,15 @@ xmlns:p="http://primefaces.org/ui">
 </table>
 <br></br>
 <p:selectOneRadio id="rol" value="#{signIn.mota}" required="true" requiredMessage="[i] Aukeratu kontu mota bat.">
-    <f:selectItem itemLabel="Gidaria" itemValue="GIDARIA"/>
-    <f:selectItem itemLabel="Bidaiaria" itemValue="BIDAIARIA"/>
+    <f:selectItem itemLabel="Gidaria" itemValue="Gidaria"/>
+    <f:selectItem itemLabel="Bidaiaria" itemValue="Bidaiaria"/>
 </p:selectOneRadio>
 
 <h:message for="rol" style="color:red"/>
 
 <br/><br/>
 <tr>
-<p:commandButton value="Erregistratu" actionListener="#{signIn.createRide}" update="@form" />
+<p:commandButton value="Erregistratu" actionListener="#{signIn.signIn}" update="@form" />
 </tr>
 <tr>
 <p>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head><title>Sartu dirua</title></h:head>
+
+<h:body>
+<h:outputText value="#{traveler.posta}"/>
+<br></br>
+<h:outputText value="#{diruat.tot}">
+    <f:convertNumber type="number" maxFractionDigits="2" />
+</h:outputText>€
+
+<h:form>
+
+<tr>
+<td>Sartu nahi duzun diru kopurua:</td>
+<td><h:inputText id="diru" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{diruat.money}"  validatorMessage="[i] Sartu zenbaki positibo bat!">
+<f:validateRegex pattern="^[0-9]+([.][0-9]+)?$"/>
+</h:inputText></td>
+<td><h:message for="diru" style="color:red" /></td>
+</tr>
+<p>
+<h:commandButton value="Sartu dirua" action="#{diruat.sartuDirua}"/>
+
+</p>
+<tr>
+<p>
+<h:commandButton value="Itzuli" action="#{diruat.itzuli}" immediate="true"/>
+</p>
+</tr>
+<h:messages id="msgs" globalOnly="true" style="color:green;" />
+</h:form>
+</h:body>
+</f:view>
+</html>

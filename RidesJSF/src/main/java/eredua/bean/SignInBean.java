@@ -43,6 +43,7 @@ public class SignInBean implements Serializable{
 		return "signInlogin";
 	}
 	public void signIn() {
+	
 		if(mota.equals("Gidaria")) {
 			if (facadeBL.badagoDriver(this.posta)==null) {
 				Driver d = new Driver(this.posta, this.pasahitza);

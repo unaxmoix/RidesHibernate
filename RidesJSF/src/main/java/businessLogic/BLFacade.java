@@ -3,8 +3,12 @@ package businessLogic;
 import java.util.Date;
 import java.util.List;
 
+
+
 //import domain.Booking;
 import domain.Ride;
+import domain.Transaction;
+import domain.Traveler;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.RideAlreadyExistException;
@@ -31,6 +35,9 @@ public interface BLFacade  {
 	 */
 	 public List<String> getDestinationCities(String from);
 
+	 public List<Transaction> lortuTransakT(Traveler t);
+	 public List<Transaction> lortuTransakD(Driver t);
+
 
 	/**
 	 * This method creates a ride for a driver
@@ -47,6 +54,21 @@ public interface BLFacade  {
 	 */
     public Ride createRide( String from, String to, Date date, int nPlaces, float price, String driverEmail) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
 	
+     public void createDriver(Driver d);
+	
+	 public void createTraveler(Traveler t);
+	
+	 public Driver badagoDriver(String d);
+	
+	 public Traveler badagoTraveler(String t);
+	 
+	 public void sartuDiruaD(double money, Driver d);
+		
+     public void sartuDiruaT(double money, Traveler t);
+
+ 	public void addTransactionT(Transaction trans, Traveler t);
+ 	
+ 	public void addTransactionD(Transaction trans, Driver d);
 	
 	/**
 	 * This method retrieves the rides from two locations on a given date 

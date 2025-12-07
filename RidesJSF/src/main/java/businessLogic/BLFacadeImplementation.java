@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
 import domain.Ride;
+import domain.Transaction;
+import domain.Traveler;
 import eredua.JPAUtil;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
@@ -16,6 +17,7 @@ import exceptions.RideAlreadyExistException;
 /**
  * It implements the business logic as a web service.
  */
+
 
 public class BLFacadeImplementation  implements BLFacade {
 	DataAccess dbManager;
@@ -38,7 +40,47 @@ public class BLFacadeImplementation  implements BLFacade {
 		
 		dbManager=da;		
 	}
-    
+    public List<Transaction> lortuTransakT(Traveler t){
+    	dbManager.open();
+    	List<Transaction> list=dbManager.lortuTransakT(t);
+		
+		dbManager.close();
+		return list;
+    }
+    public List<Transaction> lortuTransakD(Driver t){
+    	dbManager.open();
+    	List<Transaction> list=dbManager.lortuTransakD(t);
+		
+		dbManager.close();
+		return list;
+    }
+    public void createDriver(Driver d) {
+		dbManager.open();
+		dbManager.createDriver(d);
+		dbManager.close();
+	}
+    public void createTraveler(Traveler t) {
+		dbManager.open();
+		dbManager.createTraveler(t);
+		dbManager.close();
+	}
+	
+	
+	public Driver badagoDriver(String d) {
+		dbManager.open();
+		Driver ema = dbManager.badagoDriver(d);
+		dbManager.close();
+		return ema;
+	}
+	
+	
+	public Traveler badagoTraveler(String t) {
+		dbManager.open();
+		Traveler ema = dbManager.badagoTraveler(t);
+		dbManager.close();
+		return ema;
+	}
+	
     
     /**
      * {@inheritDoc}
@@ -100,13 +142,37 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.close();
 		return dates;
 	}
+
+	public void sartuDiruaD(double money, Driver d) {
+		dbManager.open();
+		dbManager.sartuDirua(money, d);
+		dbManager.close();
+	}
 	
+
+	public void sartuDiruaT(double money, Traveler t) {
+		dbManager.open();
+		dbManager.sartuDirua(money, t);
+		dbManager.close();
+	}
 	
 	public void close() {
 		DataAccess dB4oManager=new DataAccess(JPAUtil.getEntityManager());
 
 		dB4oManager.close();
 
+	}
+	public void addTransactionT(Transaction trans, Traveler t) {
+		dbManager.open();
+		dbManager.addTransaction(trans, t);
+		dbManager.close();
+	}
+	
+
+	public void addTransactionD(Transaction trans, Driver d) {
+		dbManager.open();
+		dbManager.addTransaction(trans, d);
+		dbManager.close();
 	}
 
 	/**

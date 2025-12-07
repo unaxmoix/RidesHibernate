@@ -5,15 +5,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 import businessLogic.BLFacade;
-import domain.Ride;
+import domain.*;
 import exceptions.*;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 @Named("create")
-@SessionScoped
+@RequestScoped
 
 public class CreateBean implements Serializable{
 	private String nora= null;
@@ -33,8 +33,10 @@ public class CreateBean implements Serializable{
 	
 	private BLFacade facadeBL=FacadeBean.getBusinessLogic();
 
-	private ChoiceBean menP=new ChoiceBean();
+	private DriverBean menP=new DriverBean();
+	private Driver driver;
 	public CreateBean() {
+		 driver=LoginBean.getDd();
 		 Calendar c = Calendar.getInstance();
 		 c.add(Calendar.DAY_OF_YEAR, 1);  
 		 this.bihar= c.getTime();
@@ -74,8 +76,9 @@ public class CreateBean implements Serializable{
 	}
 
 	public void createRide() throws RideMustBeLaterThanTodayException{
+		
 		try {
-		Ride r=facadeBL.createRide(nondik, nora, data, Integer.parseInt(eserKop), Float.parseFloat(eserKop), "a");
+		Ride r=facadeBL.createRide(nondik, nora, data, Integer.parseInt(eserKop), Float.parseFloat(eserKop),driver.getEmail());
 		nondik = null;
 	    nora = null;
 	    eserKop = null;
