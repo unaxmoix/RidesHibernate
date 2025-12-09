@@ -6,11 +6,17 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Kudeatu bidaiak</title></h:head>
+<h:head><title>Bukatu bidaiak</title></h:head>
 <h:body>
 
 <h:form>
-<h3>Kudeatu bidaiak</h3>
+<h:outputText value="#{finish.posta}"/>
+<br></br>
+<h:outputText value="#{finish.tot}">
+    <f:convertNumber type="number" maxFractionDigits="2" />
+</h:outputText>€
+<br></br>
+<h3>Bukatu bidaiak</h3>
 
 <p>
 <h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
@@ -19,8 +25,8 @@ xmlns:p="http://primefaces.org/ui">
 
 
 
-<p:dataTable id="taula" value="#{query.ridesList}" var="r" 
-             emptyMessage="Ez dago bidaiarik baldintza horiekin.">
+<p:dataTable id="taula" value="#{finish.ridesList}" var="r" 
+             emptyMessage="Ez dago bukatzeko bidairik.">
 
     <p:column headerText="Noiz" sortBy="#{r.date}">
         #{r.date}
@@ -33,18 +39,16 @@ xmlns:p="http://primefaces.org/ui">
     <p:column headerText="Nora">
         #{r.toa}
     </p:column>
-
-    <p:column headerText="Eserleku libreak">
-        #{r.nPlaces}
-    </p:column>
-    
-     <p:column headerText="Prezioa">
-        #{r.price}
-    </p:column>
+     
+    <p:column headerText="Irabaziak">
+    <h:outputText value="#{r.irabaziak}">
+    <f:convertNumber type="number" maxFractionDigits="2" />
+	</h:outputText>€
+	</p:column>
     <p:column headerText="">
     <p:commandButton 
-        value="Ezabatu 🎟️" 
-        actionListener="#{query.removeRide(r)}"
+        value="Bukatu 💸" 
+        actionListener="#{finish.finishRide(r)}"
         update="@form"
         process="@this" />
 	</p:column>

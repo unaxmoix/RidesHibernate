@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 
-
 //import domain.Booking;
 import domain.Ride;
 import domain.Transaction;
 import domain.Traveler;
+import domain.Balorazioa;
 import domain.Driver;
+import domain.Erreklamazioa;
+import domain.Erreserba;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.RideAlreadyExistException;
 
@@ -37,8 +39,18 @@ public interface BLFacade  {
 
 	 public List<Transaction> lortuTransakT(Traveler t);
 	 public List<Transaction> lortuTransakD(Driver t);
-
-
+	 public Erreserba erreserbaSortu(Ride r, int place, Traveler t);
+	 public List<domain.Erreserba> getAllErreserbakT(Traveler traveler,boolean b);
+	 public List<domain.Erreserba> getAllErreserbakD(Driver d);
+	public void erreserbaEzabatu(Erreserba er, Traveler t);
+	public void removeRide(String s);
+	public void erreserbaOnartu(Erreserba er);
+	public boolean erreserbaDauka(Ride r);
+	public void bukatuRide(String s);
+	public Erreklamazioa badagoErreklamazioa(Erreserba err);
+public void createReview(Balorazioa b, int r);
+	
+public void createErreklamazioa(Erreklamazioa e, int r);
 	/**
 	 * This method creates a ride for a driver
 	 * 
@@ -53,9 +65,13 @@ public interface BLFacade  {
  	 * @throws RideAlreadyExistException if the same ride already exists for the driver
 	 */
     public Ride createRide( String from, String to, Date date, int nPlaces, float price, String driverEmail) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
-	
+    public Balorazioa badagoBalorazioa(Erreserba err);
+    public void ezabatuBal(int b,Long id);
      public void createDriver(Driver d);
-	
+     public List<Balorazioa> motz(Ride r);
+     public boolean erreserbaEzOnartDauka(Ride r);
+     public List<Balorazioa> getAllBalorazioak(Driver d);
+     public List<Erreklamazioa> getAllErreklamazioak(Driver d);
 	 public void createTraveler(Traveler t);
 	
 	 public Driver badagoDriver(String d);

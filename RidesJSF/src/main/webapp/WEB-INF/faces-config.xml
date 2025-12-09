@@ -30,8 +30,64 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
+		<display-name>kontsultatuBalErr.xhtml</display-name>
+		<from-view-id>/kontsultatuBalErr.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>gidarimenu</from-outcome>
+			<to-view-id>/gidariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>finishRides.xhtml</display-name>
+		<from-view-id>/finishRides.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>gidarimenu</from-outcome>
+			<to-view-id>/gidariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>manageReserves.xhtml</display-name>
+		<from-view-id>/manageReserves.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>gidarimenu</from-outcome>
+			<to-view-id>/gidariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
 		<display-name>gidariMenu.xhtml</display-name>
 		<from-view-id>/gidariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>gidariMenu.xhtml</display-name>
+		<from-view-id>/gidariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>finish</from-outcome>
+			<to-view-id>/finishRides.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>gidariMenu.xhtml</display-name>
+		<from-view-id>/gidariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>konbaler</from-outcome>
+			<to-view-id>/kontsultatuBalErr.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>gidariMenu.xhtml</display-name>
+		<from-view-id>/gidariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>manage</from-outcome>
+			<to-view-id>/manageReserves.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>bidaiariMenu.xhtml</display-name>
+		<from-view-id>/bidaiariMenu.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
@@ -41,8 +97,8 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 		<display-name>bidaiariMenu.xhtml</display-name>
 		<from-view-id>/bidaiariMenu.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>logout</from-outcome>
-			<to-view-id>/login.xhtml</to-view-id>
+			<from-outcome>reserve</from-outcome>
+			<to-view-id>/reserveRides.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -68,6 +124,22 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 		<navigation-case>
 			<from-outcome>diruat</from-outcome>
 			<to-view-id>/sartuDirua.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>bidaiariMenu.xhtml</display-name>
+		<from-view-id>/bidaiariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>queryreserve</from-outcome>
+			<to-view-id>/queryReserves.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>bidaiariMenu.xhtml</display-name>
+		<from-view-id>/bidaiariMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>baler</from-outcome>
+			<to-view-id>/BalErrReserves.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -102,6 +174,31 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 			<to-view-id>/bidaiariMenu.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>reserveRides.xhtml</display-name>
+		<from-view-id>/reserveRides.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>bidaiarimenu</from-outcome>
+			<to-view-id>/bidaiariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>BalErrReserves.xhtml</display-name>
+		<from-view-id>/BalErrReserves.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>bidaiarimenu</from-outcome>
+			<to-view-id>/bidaiariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>queryReserves.xhtml</display-name>
+		<from-view-id>/queryReserves.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>bidaiarimenu</from-outcome>
+			<to-view-id>/bidaiariMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	<navigation-rule>
 		<display-name>gidariMenu.xhtml</display-name>
 		<from-view-id>/gidariMenu.xhtml</from-view-id>

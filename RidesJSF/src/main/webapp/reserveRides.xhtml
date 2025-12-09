@@ -6,21 +6,28 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Query Rides</title></h:head>
+<h:head><title>Erreserbatu bidaiak</title></h:head>
 <h:body>
+
 <h:form>
-<h3>Kontsultatu bidaiak</h3>
+<h:outputText value="#{reserve.posta}"/>
+<br></br>
+<h:outputText value="#{reserve.tot}">
+    <f:convertNumber type="number" maxFractionDigits="2" />
+</h:outputText>€
+<br></br>
+<h3>Erreserbatu bidaiak</h3>
 <table>
 <tr>
 <td>Nondik:</td>
 <td>
-<p:selectOneMenu id="nondik" value="#{query.departCity}" action="#{query.refresh}" required="true"
+<p:selectOneMenu id="nondik" value="#{reserve.departCity}" action="#{reserve.refresh}" required="true"
                  requiredMessage="[i] Aukera baliogabea.">
     <f:selectItem itemLabel="-- Aukeratu --" itemValue="" noSelectionOption="true" />
-    <f:selectItems value="#{query.departCities}" var="x"
+    <f:selectItems value="#{reserve.departCities}" var="x"
                    itemLabel="#{x}" itemValue="#{x}" />
     <p:ajax event="change"
-            listener="#{query.refresh}"
+            listener="#{reserve.refresh}"
             update="nora" />
 </p:selectOneMenu>
 <h:message for="nondik" style="color:red" />
@@ -31,33 +38,40 @@ xmlns:p="http://primefaces.org/ui">
 <tr>
 <td>Nora:</td>
 <td>
-<p:selectOneMenu id="nora" value="#{query.destCity}" required="true"
+<p:selectOneMenu id="nora" value="#{reserve.destCity}" required="true"
                  requiredMessage="[i] Aukera baliogabea.">
     <f:selectItem itemLabel="-- Aukeratu --" itemValue="" noSelectionOption="true" />
-    <f:selectItems value="#{query.destCities}" var="x"
+    <f:selectItems value="#{reserve.destCities}" var="x"
                    itemLabel="#{x}" itemValue="#{x}" />
-     <p:ajax event="valueChange" listener="#{query.refresh}" update="nora" />
+     <p:ajax event="valueChange" listener="#{reserve.refresh}" update="nora" />
 </p:selectOneMenu>
 <h:message for="nora" style="color:red" />
 </td>
 </tr>
-
+<tr>
+<td>Eserleku kopurua:</td>
+<td><h:inputText id="eserKop" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{reserve.places}"  validatorMessage="[i] Sartu zenbaki oso positibo bat!">
+<f:validateRegex pattern="^[0-9]+$"/>
+</h:inputText></td>
+<td><h:message for="eserKop" style="color:red" /></td>
+</tr>
 <tr>
 <td>Data:</td>
-<td><p:calendar id="data" value="#{query.data}" required="true" requiredMessage="[i] Ezin da hutsa izan." navigator="false" mode="popup" mindate="#{query.bihar}">
+<td><p:calendar id="data" value="#{reserve.data}" required="true" requiredMessage="[i] Ezin da hutsa izan." navigator="false" mode="popup" mindate="#{reserve.bihar}">
 
 </p:calendar></td>
 
 </tr>
 </table>
-<p:commandButton value="Bilatu" actionListener="#{query.getRides}" update="@form" />
+<p:commandButton value="Bilatu" actionListener="#{reserve.getRides}" update="@form" />
 <p>
-<h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
+<h:commandButton value="Itzuli" action="#{traveler.itzuli}" immediate="true"/>
 </p>
 
+<h:messages id="msgs" globalOnly="true" style="color:green;" />
 
 
-<p:dataTable id="taula" value="#{query.ridesList}" var="r" 
+<p:dataTable id="taula" value="#{reserve.ridesList}" var="r" 
              emptyMessage="Ez dago bidaiarik baldintza horiekin.">
 
     <p:column headerText="Noiz">
@@ -83,9 +97,17 @@ xmlns:p="http://primefaces.org/ui">
     <p:column headerText="Gidaria">
         #{r.driver.email}
     </p:column>
-
+	<p:column headerText="">
+    <p:commandButton 
+        value="Erreserbatu 🎟️" 
+        actionListener="#{reserve.reserveRide(r)}"
+        update="@form"
+        process="@this" />
+	</p:column>
 </p:dataTable>
+
 </h:form>
+
 </h:body>
 </f:view>
 </html>

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +19,10 @@ import javax.persistence.TypedQuery;
 
 import configuration.ConfigXML;
 import configuration.UtilDate;
+import domain.Balorazioa;
 import domain.Driver;
+import domain.Erreklamazioa;
+import domain.Erreserba;
 import domain.Ride;
 import domain.Transaction;
 import domain.Traveler;
@@ -146,6 +150,43 @@ public class DataAccess  {
 		
 		
 	}
+	public Balorazioa badagoBalorazioa(Erreserba err) {
+		List<Balorazioa> balorazioak = null;
+		try {
+			TypedQuery<Balorazioa> query = db
+					.createQuery("SELECT r FROM Balorazioa r WHERE r.erreserba.erreserbaNumber = :s", Balorazioa.class);
+			query.setParameter("s", err.getErreserbaNumber());
+			balorazioak = query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+		if(balorazioak.size()==0)return null;
+		else return balorazioak.get(0);
+	}
+	public Erreklamazioa badagoErreklamazioa(Erreserba err) {
+		List<Erreklamazioa> erreklamazioak = null;
+		try {
+			TypedQuery<Erreklamazioa> query = db
+					.createQuery("SELECT r FROM Erreklamazioa r WHERE r.erreserba.erreserbaNumber = :s", Erreklamazioa.class);
+			query.setParameter("s", err.getErreserbaNumber());
+			erreklamazioak = query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+		if(erreklamazioak.size()==0) return null;
+		else return erreklamazioak.get(0);
+	}
+	public void ezabatuBal(int b,Long id) {
+		db.getTransaction().begin();
+		Balorazioa bb= db.find(Balorazioa.class, b);
+		if(bb!=null) {
+			Ride r= db.find(Ride.class,id);
+			r.removeBalorazioa(bb);
+			db.persist(r);
+			db.remove(bb);
+		}
+		db.getTransaction().commit();
+	}
 	/**
 	 * This method creates a ride for a driver
 	 * 
@@ -188,6 +229,14 @@ public class DataAccess  {
 		}
 		
 		
+	}
+	public List<Balorazioa> motz(Ride r) {
+		db.getTransaction().begin();
+		r= db.find(Ride.class,r.getRideNumber());
+		r.getBalorazioList().size();
+		List<Balorazioa> b=r.getBalorazioList();
+		db.getTransaction().commit();
+		return b;
 	}
 	
 	/**
@@ -253,7 +302,8 @@ public class DataAccess  {
 	public List<Transaction> lortuTransakD(Driver t){
 		db.getTransaction().begin();
 		Driver driver = db.find(Driver.class, t.getEmail());
-		List<Transaction> listTansak=driver.getTransactions();
+		driver.getTransactions().size();
+		List<Transaction> listTansak= new ArrayList<>(driver.getTransactions());
 		db.getTransaction().commit();
 		return listTansak;
 		}
@@ -281,6 +331,200 @@ public class DataAccess  {
 		Traveler traveler = badagoTraveler(t.getEmail());
 		db.getTransaction().begin();
 		traveler.addMoney(money);
+		db.getTransaction().commit();
+	}
+	public Erreserba erreserbaSortu(Ride r, int place, Traveler t) {
+		Erreserba er = new Erreserba(r, place, t);
+		Traveler trav = badagoTraveler(t.getEmail());
+		db.getTransaction().begin();
+		db.persist(er);
+		trav.setMoney(t.getMoney() - (r.getPrice() * place));
+		db.getTransaction().commit();
+		return er;
+	}
+	public List<domain.Erreserba> getAllErreserbak(Traveler t,boolean b) {
+		List<Erreserba> erreserbak = null;
+		String s = t.getEmail();
+		try {
+			TypedQuery<Erreserba> query = db.createQuery("SELECT r FROM Erreserba r WHERE r.traveler.email = :s AND r.ride.bukatuta= :p ",
+					Erreserba.class);
+			query.setParameter("s", s);
+			query.setParameter("p", b);
+			erreserbak = query.getResultList();
+			
+		} catch (Exception e) {
+			
+		}
+		return erreserbak;
+	}
+	public void createReview(Balorazioa b, int r) {
+
+		db.getTransaction().begin();
+		Ride ride = db.find(Ride.class, Long.parseLong(r+""));
+		Erreserba er=db.find(Erreserba.class, b.getErreserba().getErreserbaNumber());
+		er.setBal(b.getBalorazioa());
+		ride.addBalorazioa(b);
+		db.persist(er);
+		db.getTransaction().commit();
+	}
+
+	public void createErreklamazioa(Erreklamazioa e, int r) {
+
+		db.getTransaction().begin();
+		Ride ride = db.find(Ride.class, Long.parseLong(r+""));
+		ride.addErreklamazioa(e);
+		Erreserba err=db.find(Erreserba.class,e.getErreserba().getErreserbaNumber());
+		err.setErr("berrikusten");
+		db.getTransaction().commit();
+	}
+	public boolean erreserbaDauka(Ride r) {
+		Long s = r.getRideNumber();
+		List<Erreserba> erreserbak = null;
+		try {
+			TypedQuery<Erreserba> query = db.createQuery("SELECT r FROM Erreserba r WHERE r.ride.rideNumber = :s",
+					Erreserba.class);
+			query.setParameter("s", s);
+			erreserbak = query.getResultList();
+		} catch (Exception e) {
+			return false;
+		}
+		return !erreserbak.isEmpty();
+	}
+	public boolean erreserbaEzOnartDauka(Ride r) {
+		Long s = r.getRideNumber();
+		List<Erreserba> erreserbak = null;
+		try {
+			TypedQuery<Erreserba> query = db.createQuery("SELECT r FROM Erreserba r WHERE r.ride.rideNumber = :s and r.onartua=false",
+					Erreserba.class);
+			query.setParameter("s", s);
+			erreserbak = query.getResultList();
+		} catch (Exception e) {
+			return false;
+		}
+		return !erreserbak.isEmpty();
+	}
+	public List<Balorazioa> getAllBalorazioak(Driver d){
+		db.getTransaction().begin();
+
+		List<Balorazioa> bl=new Vector<>();
+		Ride ri;
+		for (Ride r: d.getRides()) {
+			ri=db.find(Ride.class, r.getRideNumber());
+			ri.getBalorazioList().size();
+			bl.addAll(ri.getBalorazioList());
+		}
+		db.getTransaction().commit();
+
+		return bl;
+		
+	}
+	public List<Erreklamazioa> getAllErreklamazioak(Driver d){
+		db.getTransaction().begin();
+
+		List<Erreklamazioa> bl=new Vector<>();
+		Ride ri;
+
+		for (Ride r: d.getRides()) {
+			ri=db.find(Ride.class, r.getRideNumber());
+			ri.getErreklamazioList().size();
+			bl.addAll(ri.getErreklamazioList());
+		}
+		db.getTransaction().commit();
+
+		return bl;
+		
+	}
+	public List<domain.Erreserba> getAllErreserbak(Driver d) {
+		List<Erreserba> erreserbak = null;
+		String s = d.getEmail();
+		try {
+			TypedQuery<Erreserba> query = db.createQuery("SELECT r FROM Erreserba r WHERE r.ride.driver.email = :s AND r.ride.bukatuta=FALSE",
+					Erreserba.class);
+			query.setParameter("s", s);
+			erreserbak = query.getResultList();
+		} catch (Exception e) {
+			
+		}
+		return erreserbak;
+	}
+	public void removeRide(String s) {
+		db.getTransaction().begin();
+		Long id = Long.parseLong(s);
+		Ride ride = db.find(Ride.class, id);
+		Driver driver = db.find(Driver.class, ride.getDriver().getEmail());
+		driver.removeRide(ride);
+		db.remove(ride);
+		db.getTransaction().commit();
+	}
+	public void bukatuRide(String s) {
+		float money = 0;
+		int id = Integer.parseInt(s);
+		float price = this.getRide(id).getPrice();
+		List<Erreserba> erreserbak = null;
+		db.getTransaction().begin();
+		try {
+			TypedQuery<Erreserba> query = db.createQuery(
+					"SELECT r FROM Erreserba r WHERE r.ride.rideNumber = :id AND r.onartua = TRUE", Erreserba.class);
+			query.setParameter("id", Long.parseLong(id+""));
+			erreserbak = query.getResultList();
+			for (Erreserba er : erreserbak) {
+				money += (er.getPlaces() * price);
+			}
+			db.getTransaction().commit();
+		} catch (Exception e) {
+			db.getTransaction().rollback();
+			
+		}
+		
+		String email = this.getRide(id).getDriver().getEmail();
+		db.getTransaction().begin();
+		Driver d = db.find(Driver.class, email);
+		Ride ride = db.find(Ride.class, Long.parseLong(id+""));
+		ride.setBukatuta(true);
+		d.setMoney(d.getMoney() + money);
+		db.getTransaction().commit();
+		ezabatuBehinBehineko(id);
+		addTransaction(new Transaction(money, d.getMoney(), "Ordainketa."), d);
+	}
+	public void ezabatuBehinBehineko(int id) {
+		db.getTransaction().begin();
+		List<Erreserba> erreserbak = null;
+		try {
+			TypedQuery<Erreserba> query = db.createQuery(
+					"SELECT r FROM Erreserba r WHERE r.ride.rideNumber = :id AND r.onartua = FALSE", Erreserba.class);
+			query.setParameter("id", Long.parseLong(id+""));
+			erreserbak = query.getResultList();
+			for (Erreserba e : erreserbak)
+				db.remove(e);
+		} catch (Exception e) {
+			
+		}
+		
+		db.getTransaction().commit();
+	}
+	public Ride getRide(int id) {
+		db.getTransaction().begin();
+		Ride r = db.find(Ride.class, Long.parseLong(id+""));
+		db.getTransaction().commit();
+		return r;
+	}
+
+	public void erreserbaEzabatu(Erreserba er, Traveler t) {
+		Traveler trav = badagoTraveler(t.getEmail());
+		db.getTransaction().begin();
+		Erreserba erre = db.find(Erreserba.class, er.getErreserbaNumber());
+		db.remove(erre);
+		trav.setMoney(t.getMoney() + (er.getRide().getPrice() * er.getPlaces()));
+		db.getTransaction().commit();
+	}
+
+	public void erreserbaOnartu(Erreserba er) {
+		db.getTransaction().begin();
+		Erreserba erre = db.find(Erreserba.class, er.getErreserbaNumber());
+		Ride r = db.find(Ride.class, erre.getRide().getRideNumber());
+		r.setBetMinimum(r.getnPlaces() - erre.getPlaces());
+		r.setIrabaziak(r.getIrabaziak()+(r.getPrice()*er.getPlaces()));
+		erre.setOnartua(true);
 		db.getTransaction().commit();
 	}
 	

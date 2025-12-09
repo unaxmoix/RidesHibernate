@@ -18,10 +18,11 @@ xmlns:p="http://primefaces.org/ui">
 <h:form>
 <h3>Aukeratu egitekoa:</h3>
 <p>
-<h:commandButton value="Sortu bidaia" action="#{create.create}"/>
-<h:commandButton value="Kontsultatu bidaiak" action="#{query.query}" />
+<h:commandButton value="Erreserbatu bidaiak" action="#{reserve.reserve}" />
 <h:commandButton value="Sartu dirua" action="#{diruat.diruat}" />
 <h:commandButton value="Kontsultatu transakzioak" action="#{tranat.tranat}" />
+<h:commandButton value="Kontsultatu erreserbak" action="#{queryreserve.queryreserve}" />
+<h:commandButton value="Baloratu edo erreklamatu erreserbak" action="#{baler.baler}" />
 </p>
 <tr>
 <p>

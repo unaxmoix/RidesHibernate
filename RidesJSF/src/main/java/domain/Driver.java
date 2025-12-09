@@ -1,10 +1,12 @@
 package domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
-
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -61,7 +63,11 @@ public class Driver implements Serializable {
 	public void setPassword(String name) {
 		this.password = name;
 	}
-
+	public List<Ride> getPastRides() {
+	    Date today = new Date(); 
+	    
+	    return rides.stream().filter(r -> r.getDate().before(today) && !r.isBukatuta()).collect(Collectors.toList());
+	}
 	
 	
 	public String toString(){
@@ -80,7 +86,44 @@ public class Driver implements Serializable {
         rides.add(ride);
         return ride;
 	}
-
+	public void removeRide(Ride ride) {
+		rides.remove(ride);
+	}
+	public boolean doesRideExists(String from, String to, Date date)  {	
+		boolean b=false;
+		for (Ride r:rides) {
+			if ( (from.equals(r.getFroma())) && (to.equals(r.getToa())) && (date.equals(r.getDate())) )
+			 b=true;
+		}
+		return b;
+	}
+	public Ride obtainRide(Long rnm)  {	
+		Ride id= null;;
+		for (Ride r:rides) {
+			if (rnm == r.getRideNumber() )
+			 id=r;
+		}
+		return id;
+	}
+	public Ride removeRide(String froma, String toa, Date date) {
+		boolean found=false;
+		int index=0;
+		Ride r=null;
+		while (!found && index<rides.size()) {
+			r=rides.get(index);
+			if ( (froma.equals(r.getFroma())) && (toa.equals(r.getToa())) && (date.equals(r.getDate())) ) {
+				found=true;
+			}
+			index=index+1;
+			
+			
+		}
+			
+		if (found) {
+			rides.remove(index-1);
+			return r;
+		} else  return null;
+	}
 	/**
 	 * This method checks if the ride already exists for that driver
 	 * 
@@ -89,13 +132,7 @@ public class Driver implements Serializable {
 	 * @param date the date of the ride 
 	 * @return true if the ride exists and false in other case
 	 */
-	public boolean doesRideExists(String from, String to, Date date)  {	
-		for (Ride r:rides)
-			if ( (java.util.Objects.equals(r.getFroma(),from)) && (java.util.Objects.equals(r.getToa(),to)) && (java.util.Objects.equals(r.getDate(),date)) )
-			 return true;
-		
-		return false;
-	}
+	
 		
 	@Override
 	public boolean equals(Object obj) {
@@ -111,21 +148,7 @@ public class Driver implements Serializable {
 		return true;
 	}
 
-	public Ride removeRide(String from, String to, Date date) {
-		boolean found=false;
-		int index=0;
-		Ride r=null;
-		while (!found && index<=rides.size()) {
-			r=rides.get(++index);
-			if ( (java.util.Objects.equals(r.getFroma(),from)) && (java.util.Objects.equals(r.getToa(),to)) && (java.util.Objects.equals(r.getDate(),date)) )
-			found=true;
-		}
-			
-		if (found) {
-			rides.remove(index);
-			return r;
-		} else return null;
-	}
+	
 	public void addMoney(double mon) {
 		this.money+=mon;
 	}

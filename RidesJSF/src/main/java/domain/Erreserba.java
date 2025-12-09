@@ -16,19 +16,42 @@ public class Erreserba implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer erreserbaNumber;
+	@ManyToOne
+	@JoinColumn(name="ride_rideNumber")
 	private Ride ride;
 	private int places;
 	private boolean onartua;
+	@ManyToOne
+	private Traveler traveler; 
+	private int bal;
+	private String err;
 	
-	private Traveler traveler;  
 	
+	public int getBal() {
+		return bal;
+	}
+
+	public void setBal(int bal) {
+		this.bal = bal;
+	}
+
 	public Erreserba(Ride ride, int places, Traveler traveler) {
 		this.ride=ride;
 		this.places=places;
 		this.traveler = traveler;
 		this.onartua = false;
+		this.bal=0;
+		this.err="";
 	}
 	
+	public String getErr() {
+		return err;
+	}
+
+	public void setErr(String err) {
+		this.err = err;
+	}
+
 	public Erreserba() {
 		
 	}
@@ -76,5 +99,8 @@ public class Erreserba implements Serializable {
 		this.ride = ride;
 	}
 	private static String etik = "Etiquetas";
-	
+	public String toString() {
+		return erreserbaNumber+": "+ride.getFroma()+" --> "+ride.getToa()+" | "+ride.getDate() + " | " + places +" | "+ ride.getPrice()*places+"€";  
+
+	}
 }

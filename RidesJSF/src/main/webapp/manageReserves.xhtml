@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head><title>Kudeatu erreserbak</title></h:head>
+<h:body>
+
+<h:form>
+<h:outputText value="#{manage.posta}"/>
+<br></br>
+<h3>Kudeatu erreserbak</h3>
+
+<p>
+<h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
+</p>
+<h:messages id="msgs" globalOnly="true" style="color:green;" />
+
+
+<h3>🟢 Onartua | 🟠 Onartu gabea</h3>
+
+
+<p:dataTable id="taula" value="#{manage.reservesList}" var="er" 
+             emptyMessage="Ez daude erreserbarik.">
+	
+
+    <p:column headerText="Noiz" sortBy="#{er.ride.date}">
+        #{er.ride.date}
+    </p:column>
+    <p:column headerText="Nork" >
+        #{er.traveler.email}
+    </p:column>
+    <p:column headerText="Nondik">
+        #{er.ride.froma}
+    </p:column>
+
+    <p:column headerText="Nora">
+        #{er.ride.toa}
+    </p:column>
+
+    <p:column headerText="Eserleku kopurua">
+        #{er.places}
+    </p:column>
+    
+     <p:column headerText="Prezioa">
+        #{er.ride.price*er.places}
+    </p:column>
+     <p:column headerText="Egoera">
+        #{er.onartua ? '🟢' : '🟠'}
+    </p:column>
+    <p:column headerText="">
+   <p:commandButton 
+    value="✅" 
+    styleClass="ui-button-success"
+    actionListener="#{manage.accept(er)}"
+    update="@form" />
+<p:commandButton 
+    value="❌" 
+    styleClass="ui-button-danger"
+    actionListener="#{manage.cancel(er)}"
+    update="@form" />
+</p:column>
+ 
+
+</p:dataTable>
+</h:form>
+</h:body>
+</f:view>
+</html>

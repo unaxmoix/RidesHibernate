@@ -10,7 +10,10 @@ import domain.Ride;
 import domain.Transaction;
 import domain.Traveler;
 import eredua.JPAUtil;
+import domain.Balorazioa;
 import domain.Driver;
+import domain.Erreklamazioa;
+import domain.Erreserba;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.RideAlreadyExistException;
 
@@ -62,6 +65,110 @@ public class BLFacadeImplementation  implements BLFacade {
     public void createTraveler(Traveler t) {
 		dbManager.open();
 		dbManager.createTraveler(t);
+		dbManager.close();
+	}
+    public void bukatuRide(String s) {
+		dbManager.open();
+		dbManager.bukatuRide(s);
+		dbManager.close();
+	}
+    public void removeRide(String s) {
+ 	   dbManager.open();
+ 	   dbManager.removeRide(s);
+ 	   dbManager.close();
+    }
+    public boolean erreserbaDauka(Ride r) {
+		dbManager.open();
+		boolean ema = dbManager.erreserbaDauka(r);
+		dbManager.close();
+		return ema;
+	}
+    public boolean erreserbaEzOnartDauka(Ride r) {
+    	dbManager.open();
+		boolean ema = dbManager.erreserbaEzOnartDauka(r);
+		dbManager.close();
+		return ema;
+    }
+    public List<Erreklamazioa> getAllErreklamazioak(Driver d){
+    	dbManager.open();
+		List<Erreklamazioa> ema = dbManager.getAllErreklamazioak(d);
+		dbManager.close();
+		return ema;
+    	
+    }
+    public List<Balorazioa> getAllBalorazioak(Driver d){
+    	dbManager.open();
+		List<Balorazioa> ema = dbManager.getAllBalorazioak(d);
+		dbManager.close();
+		return ema;
+    	
+    }
+    public Balorazioa badagoBalorazioa(Erreserba e){
+		dbManager.open();
+		Balorazioa ema = dbManager.badagoBalorazioa(e);
+		dbManager.close();
+		return ema;
+	}
+    public Erreklamazioa badagoErreklamazioa(Erreserba e){
+		dbManager.open();
+		Erreklamazioa ema = dbManager.badagoErreklamazioa(e);
+		dbManager.close();
+		return ema;
+	}
+    public List<Balorazioa> motz(Ride r){
+    	dbManager.open();
+		List<Balorazioa> ema = dbManager.motz(r);
+		dbManager.close();
+		return ema;
+    }
+    public void ezabatuBal(int b, Long k){
+		dbManager.open();
+		dbManager.ezabatuBal(b,  k);
+		dbManager.close();
+		
+	}
+    public Erreserba erreserbaSortu(Ride r, int place, Traveler t) {
+		dbManager.open();
+		Erreserba er=dbManager.erreserbaSortu(r, place, t);
+		dbManager.close();
+		return er;
+	}
+    public void createReview(Balorazioa b, int r) {
+		dbManager.open();
+		dbManager.createReview(b, r);
+		dbManager.close();
+	}
+	
+
+	public void createErreklamazioa(Erreklamazioa e, int r) {
+		dbManager.open();
+		dbManager.createErreklamazioa(e, r);
+		dbManager.close();
+	}
+    public List<domain.Erreserba> getAllErreserbakT(Traveler t,boolean b){
+		dbManager.open();
+		List<domain.Erreserba> ema = dbManager.getAllErreserbak(t,b);
+		dbManager.close();
+		return ema;
+	}
+    public List<domain.Erreserba> getAllErreserbakD(Driver d){
+		dbManager.open();
+		List<domain.Erreserba> ema = dbManager.getAllErreserbak(d);
+		dbManager.close();
+		return ema;
+	}
+    
+	
+	public void erreserbaEzabatu(Erreserba er, Traveler t) {
+		dbManager.open();
+		dbManager.erreserbaEzabatu(er, t);
+		dbManager.close();
+	}
+	
+	
+	public void erreserbaOnartu(Erreserba er) {
+		dbManager.open();
+		dbManager.erreserbaOnartu(er);
 		dbManager.close();
 	}
 	

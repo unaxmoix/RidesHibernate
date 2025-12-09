@@ -13,23 +13,26 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
-@Named("query")
+@Named("finish")
 @RequestScoped
 
-public class QueryBean implements Serializable{
+public class FinishBean implements Serializable{
 	private Driver driver;
 	private String departCity;
 	private List<String> departCities;
 	private List<String> destCities;
 	private String destCity;
+	private String posta;
+	private double tot;
 	private Date data;
 	private BLFacade facadeBL=FacadeBean.getBusinessLogic();
 	private Date bihar;
 	private List<Ride> ridesList;
-	public QueryBean() {
+	public FinishBean() {
 		driver=LoginBean.getDd();
-		ridesList= driver.getRides();
-		
+		ridesList= driver.getPastRides();
+		posta=driver.getEmail();
+		tot=driver.getMoney();
 	}
 	
 	public Date getData() {
@@ -82,30 +85,42 @@ public class QueryBean implements Serializable{
 	public Date getBihar() {
 		return bihar;
 	}
-	
-	
-	public void removeRide(Ride r) {
-		if(facadeBL.erreserbaDauka(r)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ezin da ezabatu bidaia, erreserbak dauzka. ", null));
-		}else {
-			facadeBL.removeRide(r.getRideNumber()+"");
-			driver=facadeBL.badagoDriver(driver.getEmail());
+	public void finishRide(Ride r) {
+		if(!facadeBL.erreserbaEzOnartDauka(r)) {
+			facadeBL.bukatuRide(r.getRideNumber()+"");
+			driver= facadeBL.badagoDriver(driver.getEmail());
+			tot=driver.getMoney();
+			ridesList=driver.getPastRides();
 			LoginBean.setDd(driver);
-			ridesList=driver.getRides();
-		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Bidaia ezabatu da.", null));
-
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Bidaia bukatu da: "+ r.toString()+" | Irabaziak: "+r.getIrabaziak()+"€", null));
+		}else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Kudeatu gabeko erreserbak dituzu! ", null));
 
 		}
+		
+
 	}
-	public void setBihar(Date bihar) {
-		this.bihar = bihar;
+	
+	
+	
+	public String getPosta() {
+		return posta;
 	}
-	public String query() {
-		refresh();
-		departCity=null;
-		destCity=null;
-		data=null;
-		return "query";
+
+	public void setPosta(String posta) {
+		this.posta = posta;
+	}
+
+	public double getTot() {
+		return tot;
+	}
+
+	public void setTot(double tot) {
+		this.tot = tot;
+	}
+
+	public String finish() {
+		return "finish";
 	}
 	
 	

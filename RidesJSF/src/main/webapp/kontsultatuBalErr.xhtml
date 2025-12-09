@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head><title> Balorazioak eta erreklamazioak</title></h:head>
+<h:body>
+<h:outputText value="#{driver.posta}"/>
+<br></br>
+
+<h:outputText value="#{driver.money}">
+    <f:convertNumber type="number" maxFractionDigits="2" />
+</h:outputText>€
+<h:form>
+<h3>Balorazioak eta erreklamazioak</h3>
+
+<p>
+<h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
+</p>
+
+
+
+    <p:selectBooleanCheckbox value="#{konbaler.showBalorazioak}" itemLabel="Balorazioak">
+        <p:ajax update="@form"/>
+    </p:selectBooleanCheckbox>
+
+    <br/>
+
+    <p:selectBooleanCheckbox value="#{konbaler.showErreklamazioak}" itemLabel="Erreklamazioak">
+        <p:ajax update="@form"/>
+    </p:selectBooleanCheckbox>
+
+    <br/><br/>
+
+  
+    <p:outputPanel id="BalorazioakTable" rendered="#{konbaler.showBalorazioak}">
+        <h3>Balorazioak</h3>
+
+        <p:dataTable value="#{konbaler.balList}" var="b"
+                     emptyMessage="Ez dago baloraziorik">
+
+            <p:column headerText="Noiz" sortBy="#{er.ride.date}">
+        #{b.erreserba.ride.date}
+    </p:column>
+    
+    <p:column headerText="Nondik">
+        #{b.erreserba.ride.froma}
+    </p:column>
+
+    <p:column headerText="Nora">
+        #{b.erreserba.ride.toa}
+    </p:column>
+
+    <p:column headerText="Eserleku kopurua">
+        #{b.erreserba.places}
+    </p:column>
+    
+     <p:column headerText="Prezioa">
+        #{b.erreserba.ride.price*er.places}
+    </p:column>
+
+           <p:column headerText="Balorazioa">
+    			<p:rating 
+        value="#{b.balorazioa}" 
+        stars="5" 
+        cancel="false"
+        readonly="true" />
+				</p:column>
+
+        </p:dataTable>
+        <br/>
+    </p:outputPanel>
+
+
+
+    <p:outputPanel id="ErreklamazioakTable" rendered="#{konbaler.showErreklamazioak}">
+        <h3>Erreklamazioak</h3>
+
+        <p:dataTable value="#{konbaler.errList}" var="r"
+                     emptyMessage="Ez dago erreklamaziorik">
+
+            <p:column headerText="Data">
+                #{r.data}
+            </p:column>
+
+            <p:column headerText="Gaia">
+                #{r.titulo}
+            </p:column>
+
+            <p:column headerText="Deskribapena">
+                #{r.descripcion}
+            </p:column>
+
+        </p:dataTable>
+    </p:outputPanel>
+   
+    
+   
+
+</h:form>
+</h:body>
+</f:view>
+</html>

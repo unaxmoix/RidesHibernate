@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head><title>Baloratu edo erreklamatu bidaiak</title></h:head>
+<h:body>
+
+<h:form>
+<h:outputText value="#{queryreserve.posta}"/>
+<br></br>
+<h:outputText value="#{queryreserve.tot}">
+    <f:convertNumber type="number" maxFractionDigits="2" />
+</h:outputText>€
+<br></br>
+<h3>Baloratu edo erreklamatu bidaiak</h3>
+
+<p>
+<h:commandButton value="Itzuli" action="#{traveler.itzuli}" immediate="true"/>
+</p>
+<h:messages id="msgs" globalOnly="true" style="color:green;" />
+
+<h3>
+    <span>🟦 Berrikusten</span> — 
+    <span>🟩 Onartua</span> — 
+    <span>🟥 Baztertuta</span> — 
+    <span>⬜ Egin gabe</span>
+</h3>
+
+
+
+
+<p:dataTable id="taula" value="#{baler.reservesList}" var="er" 
+             emptyMessage="Ez duzu erreserbarik.">
+
+    <p:column headerText="Noiz" sortBy="#{er.ride.date}">
+        #{er.ride.date}
+    </p:column>
+    
+    <p:column headerText="Nondik">
+        #{er.ride.froma}
+    </p:column>
+
+    <p:column headerText="Nora">
+        #{er.ride.toa}
+    </p:column>
+
+    <p:column headerText="Eserleku kopurua">
+        #{er.places}
+    </p:column>
+    
+     <p:column headerText="Prezioa">
+        #{er.ride.price*er.places}
+    </p:column>
+     
+    <p:column headerText="Balorazioa">
+    <p:rating 
+    value="#{er.bal}"
+    stars="5"
+    cancel="false">
+
+    <p:ajax event="rate"
+            listener="#{baler.baloratu(er)}"
+            />
+</p:rating>
+</p:column>
+<p:column headerText="">
+    <p:commandButton value="Erreklamazioa jarri 💸" 
+                     icon="pi pi-exclamation-circle"
+                     oncomplete="PF('reklDialog').show();" 
+                     actionListener="#{baler.erreklamatu(er)}"
+                     update="formReklDialog"/>
+</p:column>
+
+ <p:column headerText="Erreklamazioaren egoera">
+    <h:outputText value="
+        #{er.err eq 'berrikusten' ? '🟦' :
+           er.err eq 'onartua' ? '🟩' :
+           er.err eq 'baztertuta' ? '🟥' : 
+           '⬜'}" />
+</p:column>
+
+</p:dataTable>
+
+</h:form>
+<p:dialog id="reklDialog"
+          header="Erreklamazioa"
+          widgetVar="reklDialog"
+          modal="true"
+          resizable="false"
+          width="500"
+          height="350">
+
+    <h:form id="formReklDialog">
+
+        <h:panelGrid columns="2" cellpadding="7">
+            <h:outputLabel value="Gaia:"/>
+            <h:inputText value="#{baler.erTit}" required="true"/>
+
+            <h:outputLabel value="Deskribapena:"/>
+            <h:inputTextarea value="#{baler.erDesk}" rows="5" cols="25" required="true"/>
+        </h:panelGrid>
+
+        <br/>
+
+        <p:commandButton value="Bidali" 
+                         actionListener="#{baler.erBidali}"
+                         update=":msgs :mainForm:taula"
+                         oncomplete="PF('reklDialog').hide();"/>
+
+    </h:form>
+
+</p:dialog>
+</h:body>
+</f:view>
+</html>

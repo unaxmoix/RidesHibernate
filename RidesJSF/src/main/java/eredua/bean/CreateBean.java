@@ -78,7 +78,8 @@ public class CreateBean implements Serializable{
 	public void createRide() throws RideMustBeLaterThanTodayException{
 		
 		try {
-		Ride r=facadeBL.createRide(nondik, nora, data, Integer.parseInt(eserKop), Float.parseFloat(eserKop),driver.getEmail());
+		Ride r=facadeBL.createRide(nondik, nora, data, Integer.parseInt(eserKop), Float.parseFloat(prezioa),driver.getEmail());
+		LoginBean.setDd(facadeBL.badagoDriver(driver.getEmail()));
 		nondik = null;
 	    nora = null;
 	    eserKop = null;
