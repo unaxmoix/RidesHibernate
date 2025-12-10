@@ -14,7 +14,7 @@ xmlns:p="http://primefaces.org/ui">
 <tr>
 <td>Nondik:</td>
 <td><h:inputText id="nondik" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{create.nondik}" validatorMessage="[i] Izen baliogabea.">
-<f:validateRegex pattern="^(([a-z]|[A-Z])+[0-9]?)$"/>
+<f:validateRegex pattern="^([A-Za-z0-9-]+)$"/>
 </h:inputText></td>
 <td><h:message for="nondik" style="color:red" /></td>
 </tr>

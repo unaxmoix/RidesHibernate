@@ -9,7 +9,7 @@ xmlns:p="http://primefaces.org/ui">
 <h:head><title>Baloratu edo erreklamatu bidaiak</title></h:head>
 <h:body>
 
-<h:form>
+<h:form id="mainForm">
 <h:outputText value="#{queryreserve.posta}"/>
 <br></br>
 <h:outputText value="#{queryreserve.tot}">
@@ -23,7 +23,7 @@ xmlns:p="http://primefaces.org/ui">
 </p>
 <h:messages id="msgs" globalOnly="true" style="color:green;" />
 
-<h3>
+<h3>Erreklamazioaren egoera: 
     <span>🟦 Berrikusten</span> — 
     <span>🟩 Onartua</span> — 
     <span>🟥 Baztertuta</span> — 
@@ -52,9 +52,11 @@ xmlns:p="http://primefaces.org/ui">
         #{er.places}
     </p:column>
     
-     <p:column headerText="Prezioa">
-        #{er.ride.price*er.places}
-    </p:column>
+    <p:column headerText="Prezioa">
+    <h:outputText value="#{er.ride.price * er.places}">
+        <f:convertNumber type="number" maxFractionDigits="2" />
+    </h:outputText>€
+</p:column>
      
     <p:column headerText="Balorazioa">
     <p:rating 
@@ -68,14 +70,14 @@ xmlns:p="http://primefaces.org/ui">
 </p:rating>
 </p:column>
 <p:column headerText="">
-    <p:commandButton value="Erreklamazioa jarri 💸" 
+    <p:commandButton value="Erreklamazioa jarri💸" 
                      icon="pi pi-exclamation-circle"
                      oncomplete="PF('reklDialog').show();" 
                      actionListener="#{baler.erreklamatu(er)}"
                      update="formReklDialog"/>
 </p:column>
 
- <p:column headerText="Erreklamazioaren egoera">
+ <p:column headerText="">
     <h:outputText value="
         #{er.err eq 'berrikusten' ? '🟦' :
            er.err eq 'onartua' ? '🟩' :
@@ -97,7 +99,7 @@ xmlns:p="http://primefaces.org/ui">
     <h:form id="formReklDialog">
 
         <h:panelGrid columns="2" cellpadding="7">
-            <h:outputLabel value="Gaia:"/>
+            <h:outputLabel value="Arrazoia"/>
             <h:inputText value="#{baler.erTit}" required="true"/>
 
             <h:outputLabel value="Deskribapena:"/>
@@ -108,7 +110,7 @@ xmlns:p="http://primefaces.org/ui">
 
         <p:commandButton value="Bidali" 
                          actionListener="#{baler.erBidali}"
-                         update=":msgs :mainForm:taula"
+                         update=":mainForm:msgs :mainForm:taula"
                          oncomplete="PF('reklDialog').hide();"/>
 
     </h:form>

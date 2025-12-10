@@ -133,7 +133,9 @@ public class ReserveBean implements Serializable{
 	}
 	public void reserveRide(Ride r) {
 		if(r.getPrice()* Integer.parseInt(places) >traveler.getMoney()) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ez duzu nahiko diru. Hau falta da: "+(r.getPrice()* Integer.parseInt(places) -traveler.getMoney())+"€", null));
+			double falta = r.getPrice() * Integer.parseInt(places) - traveler.getMoney();
+			String faltahobetua = String.format("%.2f", falta);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ez duzu nahiko diru. Hau falta da: "+faltahobetua+"€", null));
 
 		}else if(Integer.parseInt(places)> r.getnPlaces()){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ez daude nahiko eserleku. Eskuragarri dauden eserleku kopurua: "+r.getnPlaces(), null));

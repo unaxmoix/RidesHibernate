@@ -12,10 +12,11 @@ import domain.*;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
 @Named("baler")
-@RequestScoped
+@ViewScoped
 
 public class BalErBean implements Serializable{
 	private Traveler traveler;
@@ -31,6 +32,7 @@ public class BalErBean implements Serializable{
     private String erTit;
     private String erDesk;
 	public BalErBean() {
+		System.out.println("Berriro...");
 		traveler=LoginBean.getTt();
 		reservesList= facadeBL.getAllErreserbakT(traveler,true);
 		
@@ -64,7 +66,7 @@ public class BalErBean implements Serializable{
 	}
 
 	public void erreklamatu(Erreserba r) {
-        this.auk = r;
+		this.setAuk(r);
         this.erTit = "";
         this.erDesk = "";
     }
@@ -116,6 +118,7 @@ public class BalErBean implements Serializable{
 	}
 
 	public void erBidali() {
+		System.out.println(auk);
 		Erreklamazioa e=facadeBL.badagoErreklamazioa(auk);
 		if(e==null) {
 			 Erreklamazioa er = new Erreklamazioa(auk.getTraveler().getEmail(),erTit,erDesk,auk);
@@ -133,7 +136,7 @@ public class BalErBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Erreklamazioa arrakastarik gabe ebatzi da jada.", null));
 
 		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Erreklamazioa berrikuspen-egoeran jarraitzen du.", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Erreklamazioak berrikuspen-egoeran jarraitzen du.", null));
 
 		}
 	   

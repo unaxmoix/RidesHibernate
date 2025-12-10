@@ -85,6 +85,11 @@ public void createErreklamazioa(Erreklamazioa e, int r);
  	public void addTransactionT(Transaction trans, Traveler t);
  	
  	public void addTransactionD(Transaction trans, Driver d);
+ 	
+	public void onartuErreklamazioa(Erreklamazioa e);
+	
+	public void baztertuErreklamazioa(Erreklamazioa e);
+
 	
 	/**
 	 * This method retrieves the rides from two locations on a given date 

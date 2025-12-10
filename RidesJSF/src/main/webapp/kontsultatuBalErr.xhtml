@@ -77,22 +77,68 @@ xmlns:p="http://primefaces.org/ui">
 
 
     <p:outputPanel id="ErreklamazioakTable" rendered="#{konbaler.showErreklamazioak}">
-        <h3>Erreklamazioak</h3>
-
+<h3>
+    Erreklamazioak 
+    <span style="font-size:0.9em; margin-left:15px;">
+        <span style="color:green;">🟢 Onartu</span> 
+        <span style="color:red;">🔴 Baztertu</span>
+    </span>
+</h3>
         <p:dataTable value="#{konbaler.errList}" var="r"
                      emptyMessage="Ez dago erreklamaziorik">
 
-            <p:column headerText="Data">
-                #{r.data}
-            </p:column>
+            <p:column headerText="Noiz" sortBy="#{er.ride.date}">
+        		#{r.erreserba.ride.date}
+    		</p:column>
+    
+    		<p:column headerText="Nondik">
+    		    #{r.erreserba.ride.froma}
+    		</p:column>
 
-            <p:column headerText="Gaia">
-                #{r.titulo}
-            </p:column>
+    		<p:column headerText="Nora">
+     		   #{r.erreserba.ride.toa}
+    		</p:column>
 
+    		<p:column headerText="Eserleku kopurua">
+     		   #{r.erreserba.places}
+    		</p:column>
+    
+     		<p:column headerText="Prezioa">
+       		 	#{r.erreserba.ride.price*er.places}
+    		</p:column>
+
+            <p:column headerText="Arrazoia">
+                #{r.title}
+            </p:column>
             <p:column headerText="Deskribapena">
-                #{r.descripcion}
+                #{r.description}
             </p:column>
+            <p:column headerText="Bidaiaria">
+                #{r.email}
+            </p:column>
+           <p:column headerText="" style="text-align:center; width:120px;">
+    <div style="display:flex; justify-content:center; gap:8px;">
+        
+        <p:commandButton 
+            value="" 
+            styleClass="rounded-button ui-button-success"
+            style="width:35px; height:35px; font-size:18px; padding:0;"
+            action="#{konbaler.onartuErr(r)}"
+            update="@form"
+            title="Onartu"
+        />
+
+        <p:commandButton 
+            value="" 
+            styleClass="rounded-button ui-button-danger"
+            style="width:35px; height:35px; font-size:18px; padding:0;"
+            action="#{konbaler.baztertuErr(r)}"
+            update="@form"
+            title="Ukatu"
+        />
+
+    </div>
+</p:column>
 
         </p:dataTable>
     </p:outputPanel>

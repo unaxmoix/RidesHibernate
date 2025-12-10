@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 public class Erreklamazioa implements Serializable{
 
 	private boolean eginda;
+	@ManyToOne
 	private Erreserba erreserba;
 	private String email;
 
@@ -36,6 +38,10 @@ public class Erreklamazioa implements Serializable{
 		onartua=false;
 	}
 	
+	public Integer getId() {
+		return id;
+	}
+
 	public boolean isOnartua() {
 		return onartua;
 	}

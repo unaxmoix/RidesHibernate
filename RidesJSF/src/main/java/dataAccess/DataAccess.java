@@ -377,6 +377,27 @@ public class DataAccess  {
 		err.setErr("berrikusten");
 		db.getTransaction().commit();
 	}
+	
+	public void onartuErreklamazioa(Erreklamazioa e) {
+		db.getTransaction().begin();
+		Erreklamazioa r=db.find(Erreklamazioa.class,e.getId());
+		r.setEginda(true);
+		r.setOnartua(true);
+		Erreserba err=db.find(Erreserba.class, r.getErreserba().getErreserbaNumber());
+		err.setErr("onartua");
+		db.getTransaction().commit();
+	}
+	
+	public void baztertuErreklamazioa(Erreklamazioa e) {
+		db.getTransaction().begin();
+		Erreklamazioa r=db.find(Erreklamazioa.class,e.getId());
+		r.setEginda(true);
+		r.setOnartua(false);
+		Erreserba err=db.find(Erreserba.class, r.getErreserba().getErreserbaNumber());
+		err.setErr("baztertuta");
+		db.getTransaction().commit();
+	}
+	
 	public boolean erreserbaDauka(Ride r) {
 		Long s = r.getRideNumber();
 		List<Erreserba> erreserbak = null;
@@ -427,7 +448,11 @@ public class DataAccess  {
 		for (Ride r: d.getRides()) {
 			ri=db.find(Ride.class, r.getRideNumber());
 			ri.getErreklamazioList().size();
-			bl.addAll(ri.getErreklamazioList());
+			for (Erreklamazioa er : ri.getErreklamazioList()) {
+				if(!er.isEginda()) {
+					bl.add(er);
+				}
+			}
 		}
 		db.getTransaction().commit();
 

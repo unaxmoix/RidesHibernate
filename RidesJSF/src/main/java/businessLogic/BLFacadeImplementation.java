@@ -145,6 +145,19 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.createErreklamazioa(e, r);
 		dbManager.close();
 	}
+	
+	public void onartuErreklamazioa(Erreklamazioa e) {
+		dbManager.open();
+		dbManager.onartuErreklamazioa(e);
+		dbManager.close();
+	}
+	
+	public void baztertuErreklamazioa(Erreklamazioa e) {
+		dbManager.open();
+		dbManager.baztertuErreklamazioa(e);
+		dbManager.close();
+	}
+
     public List<domain.Erreserba> getAllErreserbakT(Traveler t,boolean b){
 		dbManager.open();
 		List<domain.Erreserba> ema = dbManager.getAllErreserbak(t,b);

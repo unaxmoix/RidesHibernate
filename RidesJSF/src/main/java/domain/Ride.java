@@ -244,7 +244,7 @@ public class Ride implements Serializable {
 
 
 	public String toString(){
-		return rideNumber+": "+froma+" --> "+toa+" | "+date + " | " + nPlaces +" | "+ price+"€";  	}
+		return rideNumber+": "+froma+" --> "+toa+" | "+date + " | " + nPlaces +" | "+ String.format("%.2f", price) +"€";  	}
 
 
 

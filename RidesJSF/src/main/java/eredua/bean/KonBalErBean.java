@@ -73,6 +73,32 @@ public class KonBalErBean implements Serializable{
 		this.transak = transak;
 	}
 	
+	public void onartuErr(Erreklamazioa r) {
+		facadeBL.onartuErreklamazioa(r);
+		errList=facadeBL.getAllErreklamazioak(driver);
+		
+		Float money = r.getErreserba().getPlaces()*r.getErreserba().getRide().getPrice();
+		facadeBL.sartuDiruaD(Double.parseDouble("-"+money), driver);
+		driver =facadeBL.badagoDriver(driver.getEmail());
+		Transaction trana= new Transaction(Double.parseDouble("-"+money),driver.getMoney(),"Erreklamazio bat onartu da.");
+		facadeBL.addTransactionD(trana, driver);
+		driver =facadeBL.badagoDriver(driver.getEmail());
+		LoginBean.setDd(driver);
+		
+		Traveler traveler=facadeBL.badagoTraveler(r.getEmail());
+		facadeBL.sartuDiruaT(Double.parseDouble(money+""), traveler);
+		traveler=facadeBL.badagoTraveler(traveler.getEmail());
+		trana= new Transaction(Double.parseDouble(money+""),traveler.getMoney(),"Erreklamazio bat onartu da.");
+		facadeBL.addTransactionT(trana, traveler);
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Erreklamazioa onartu da! Itzulitako dirua: "+ money + "€", null));
+	}
+
+	public void baztertuErr(Erreklamazioa r) {
+		facadeBL.baztertuErreklamazioa(r);
+		 errList=facadeBL.getAllErreklamazioak(driver);
+	}
+	
 	public String konbaler() {
 		return "konbaler";
 	}
