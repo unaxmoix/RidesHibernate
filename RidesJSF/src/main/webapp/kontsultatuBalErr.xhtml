@@ -10,17 +10,16 @@ xmlns:p="http://primefaces.org/ui">
 <h:body>
 <h:outputText value="#{driver.posta}"/>
 <br></br>
-
-<h:outputText value="#{driver.money}">
+<h:form>
+<h:outputText value="#{konbaler.tot}">
     <f:convertNumber type="number" maxFractionDigits="2" />
 </h:outputText>€
-<h:form>
 <h3>Balorazioak eta erreklamazioak</h3>
 
 <p>
 <h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
 </p>
-
+<h:messages id="msgs" globalOnly="true" style="color:green;" />
 
 
     <p:selectBooleanCheckbox value="#{konbaler.showBalorazioak}" itemLabel="Balorazioak">
@@ -58,9 +57,13 @@ xmlns:p="http://primefaces.org/ui">
         #{b.erreserba.places}
     </p:column>
     
-     <p:column headerText="Prezioa">
-        #{b.erreserba.ride.price*er.places}
+    <p:column headerText="Prezioa">
+    <h:outputText value="#{b.erreserba.ride.price*b.erreserba.places}">
+        <f:convertNumber type="number" maxFractionDigits="2" />
+    </h:outputText>€
     </p:column>
+    
+     
 
            <p:column headerText="Balorazioa">
     			<p:rating 
@@ -104,8 +107,10 @@ xmlns:p="http://primefaces.org/ui">
     		</p:column>
     
      		<p:column headerText="Prezioa">
-       		 	#{r.erreserba.ride.price*er.places}
-    		</p:column>
+    <h:outputText value="#{r.erreserba.ride.price*r.erreserba.places}">
+        <f:convertNumber type="number" maxFractionDigits="2" />
+    </h:outputText>€
+    </p:column>
 
             <p:column headerText="Arrazoia">
                 #{r.title}

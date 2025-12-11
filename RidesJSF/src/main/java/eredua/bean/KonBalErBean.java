@@ -23,7 +23,7 @@ public class KonBalErBean implements Serializable{
 	
 	
 	private BLFacade facadeBL=FacadeBean.getBusinessLogic();
-
+	private double tot;
 
 	private Driver driver;
 	private List<Transaction> transak;
@@ -39,13 +39,25 @@ public class KonBalErBean implements Serializable{
 		 driver=LoginBean.getDd();
 		 balList=facadeBL.getAllBalorazioak(driver);
 		 errList=facadeBL.getAllErreklamazioak(driver);
-		 
+		 tot=driver.getMoney();
 		 
 	}
     
 
 
-    public boolean isShowErreklamazioak() { return showErreklamazioak; }
+    public double getTot() {
+		return tot;
+	}
+
+
+
+	public void setTot(double tot) {
+		this.tot = tot;
+	}
+
+
+
+	public boolean isShowErreklamazioak() { return showErreklamazioak; }
     public void setShowErreklamazioak(boolean showErreklamazioak) { this.showErreklamazioak = showErreklamazioak; }
 	public boolean isShowBalorazioak() {
 		return showBalorazioak;
@@ -84,7 +96,8 @@ public class KonBalErBean implements Serializable{
 		facadeBL.addTransactionD(trana, driver);
 		driver =facadeBL.badagoDriver(driver.getEmail());
 		LoginBean.setDd(driver);
-		
+		tot=driver.getMoney();
+
 		Traveler traveler=facadeBL.badagoTraveler(r.getEmail());
 		facadeBL.sartuDiruaT(Double.parseDouble(money+""), traveler);
 		traveler=facadeBL.badagoTraveler(traveler.getEmail());
