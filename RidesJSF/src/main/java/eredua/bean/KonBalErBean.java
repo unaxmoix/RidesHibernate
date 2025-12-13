@@ -104,7 +104,7 @@ public class KonBalErBean implements Serializable{
 		trana= new Transaction(Double.parseDouble(money+""),traveler.getMoney(),"Erreklamazio bat onartu da.");
 		facadeBL.addTransactionT(trana, traveler);
 		
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Erreklamazioa onartu da! Itzulitako dirua: "+ money + "€", null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreklamazioa onartu da! Itzulitako dirua: "+ money + "€", null));
 	}
 
 	public void baztertuErr(Erreklamazioa r) {

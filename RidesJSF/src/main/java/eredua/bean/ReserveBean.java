@@ -135,10 +135,10 @@ public class ReserveBean implements Serializable{
 		if(r.getPrice()* Integer.parseInt(places) >traveler.getMoney()) {
 			double falta = r.getPrice() * Integer.parseInt(places) - traveler.getMoney();
 			String faltahobetua = String.format("%.2f", falta);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ez duzu nahiko diru. Hau falta da: "+faltahobetua+"€", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Ez duzu nahiko diru. Hau falta da: "+faltahobetua+"€", null));
 
 		}else if(Integer.parseInt(places)> r.getnPlaces()){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ez daude nahiko eserleku. Eskuragarri dauden eserleku kopurua: "+r.getnPlaces(), null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Ez daude nahiko eserleku. Eskuragarri dauden eserleku kopurua: "+r.getnPlaces(), null));
 			
 		}else {
 			Erreserba er=facadeBL.erreserbaSortu(r, Integer.parseInt(places), traveler);
@@ -148,7 +148,7 @@ public class ReserveBean implements Serializable{
 			LoginBean.setTt(traveler);
 			Transaction trana= new Transaction(-d,traveler.getMoney(),"Erreserba eskaera gauzatu da.");
 			facadeBL.addTransactionT(trana, traveler);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Erreserba eskaera gauzatu da: "+ er.toString(), null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreserba eskaera gauzatu da: "+ er.toString(), null));
 
 		}
 		

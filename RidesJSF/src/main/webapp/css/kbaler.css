@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #f4f5f7;
+    margin: 0;
+    color: #333;
+}
+
+.query-container {
+    max-width: 1500px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px 40px;
+    border-bottom: 1px solid #ddd;
+}
+
+h3 {
+    margin: 20px 0 15px 0;
+    font-size: 20px;
+}
+
+.top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.top-info .email {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.top-info .money {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #777;
+}
+
+h\\:commandButton {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 0.85em;
+    text-decoration: underline;
+}
+
+h\\:commandButton:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+.ui-messages {
+    margin: 10px 0 15px 0;
+}
+
+.ui-messages-info {
+    background: #e8f5e9 !important;
+    border: 1px solid #c8e6c9 !important;
+    color: #2e7d32 !important;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.ui-messages-info::before {
+    content: "✔";
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.ui-selectbooleancheckbox {
+    margin: 8px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9em;
+}
+
+.ui-datatable {
+    width: 100%;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+.ui-datatable th {
+    background: #f4f5f7;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.ui-datatable td {
+    padding: 6px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.ui-rating-star {
+    font-size: 1.1em;
+}
+
+.rounded-button {
+    border-radius: 50% !important;
+    width: 35px;
+    height: 35px;
+    padding: 0 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reserva-actions .btn-secondary-link,
+.reserva-actions input[type="submit"].btn-secondary-link {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    color: #888; 
+    font-size: 0.85em;
+    padding: 0;
+    text-decoration: underline; 
+}
+
+.reserva-actions .btn-secondary-link:hover,
+.reserva-actions input[type="submit"].btn-secondary-link:hover {
+    color: #555;  
+    text-decoration: none;
+}
+
+.rounded-button .ui-icon {
+    display: none !important;
+}
+
+.ui-button-success:hover,
+.ui-button-danger:hover {
+    filter: brightness(0.9);
+}
+
+h3 span {
+    font-size: 0.9em;
+    margin-left: 15px;
+}
+
+h3 span span {
+    margin-right: 10px;
+    font-weight: 500;
+}

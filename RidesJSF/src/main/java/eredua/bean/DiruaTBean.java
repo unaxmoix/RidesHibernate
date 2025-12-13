@@ -55,7 +55,7 @@ public class DiruaTBean implements Serializable{
 		LoginBean.setTt(teta);
 		tt=teta;
 		tot=teta.getMoney();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Sartutako dirua: "+ money + "€", null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sartutako dirua: "+ money + "€", null));
 	}
 	public String diruat() {
 		System.out.println("e");		

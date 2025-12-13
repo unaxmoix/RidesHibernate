@@ -6,20 +6,39 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title> Balorazioak eta erreklamazioak</title></h:head>
+<h:head><title> Balorazioak eta erreklamazioak</title>
+    <link rel="stylesheet" href="css/kbaler.css" />
+</h:head>
+
 <h:body>
-<h:outputText value="#{driver.posta}"/>
 <br></br>
+    <div class="query-container">
+
+<div class="top-info">
+        <span class="email">
+            <h:outputText value="#{driver.posta}"/>
+        </span>
+
+        <h:panelGroup id="moneyPanel">
+    <span class="money">
+        <h:outputText value="#{konbaler.tot}">
+            <f:convertNumber type="number" maxFractionDigits="2"/>
+        </h:outputText>€
+    </span>
+</h:panelGroup>
+
+    </div>
+
 <h:form>
-<h:outputText value="#{konbaler.tot}">
-    <f:convertNumber type="number" maxFractionDigits="2" />
-</h:outputText>€
+
 <h3>Balorazioak eta erreklamazioak</h3>
 
-<p>
-<h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
-</p>
-<h:messages id="msgs" globalOnly="true" style="color:green;" />
+<div class="reserva-actions">
+            <h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"
+                             styleClass="btn-secondary-link" />
+        </div>
+        <br></br>
+<p:messages id="msgs" globalOnly="true" />
 
 
     <p:selectBooleanCheckbox value="#{konbaler.showBalorazioak}" itemLabel="Balorazioak">
@@ -129,7 +148,7 @@ xmlns:p="http://primefaces.org/ui">
             styleClass="rounded-button ui-button-success"
             style="width:35px; height:35px; font-size:18px; padding:0;"
             action="#{konbaler.onartuErr(r)}"
-            update="@form"
+            update="@form :moneyPanel"
             title="Onartu"
         />
 
@@ -138,7 +157,7 @@ xmlns:p="http://primefaces.org/ui">
             styleClass="rounded-button ui-button-danger"
             style="width:35px; height:35px; font-size:18px; padding:0;"
             action="#{konbaler.baztertuErr(r)}"
-            update="@form"
+            update="@form :moneyPanel"
             title="Ukatu"
         />
 
@@ -152,6 +171,7 @@ xmlns:p="http://primefaces.org/ui">
    
 
 </h:form>
+    </div>
 </h:body>
 </f:view>
 </html>

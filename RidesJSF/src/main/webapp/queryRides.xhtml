@@ -6,23 +6,24 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Kudeatu bidaiak</title></h:head>
+<h:head><title>Kudeatu bidaiak</title>
+    <link rel="stylesheet" href="css/query.css" />
+</h:head>
 <h:body>
 
-<h:form>
-<h3>Kudeatu bidaiak</h3>
+<div class="query-container">
+    <h:form>
+        <h3>Kudeatu bidaiak</h3>
 
-<p>
-<h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
-</p>
-<h:messages id="msgs" globalOnly="true" style="color:green;" />
+        <div class="reserva-actions">
+            <h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"
+                             styleClass="btn-secondary-link" />
+        </div>
 
+        <p:messages id="msgs" globalOnly="true" infoClass="info" errorClass="error" />
 
-
-<p:dataTable id="taula" value="#{query.ridesList}" var="r" 
-             emptyMessage="Ez dago bidaiarik baldintza horiekin.">
-
-    <p:column headerText="Noiz" sortBy="#{r.date}">
+        <p:dataTable id="taula" value="#{query.ridesList}" var="r" emptyMessage="Ez dago bidaiarik baldintza horiekin.">
+<p:column headerText="Noiz" sortBy="#{r.date}">
         #{r.date}
     </p:column>
     
@@ -34,7 +35,7 @@ xmlns:p="http://primefaces.org/ui">
         #{r.toa}
     </p:column>
 
-    <p:column headerText="Eserleku libreak">
+    <p:column headerText="Eserlekuak">
         #{r.nPlaces}
     </p:column>
     
@@ -43,16 +44,14 @@ xmlns:p="http://primefaces.org/ui">
     </p:column>
     <p:column headerText="">
     <p:commandButton 
-        value="Ezabatu 🎟️" 
+        value="Ezabatu" 
         actionListener="#{query.removeRide(r)}"
         update="@form"
         process="@this" />
 	</p:column>
-     
- 
-
-</p:dataTable>
-</h:form>
+             </p:dataTable> 
+    </h:form>
+</div>
 </h:body>
 </f:view>
 </html>

@@ -85,10 +85,10 @@ public class CreateBean implements Serializable{
 	    eserKop = null;
 	    prezioa = null;
 	    data = null;
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Bidaia sortu da: "+ r.toString(), null));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia sortu da: "+ r.toString(), null));
 		}catch(Exception e) {
 		
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ez da sortu bidaia ", null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Ez da sortu bidaia ", null));
 		}
 	   
 	    

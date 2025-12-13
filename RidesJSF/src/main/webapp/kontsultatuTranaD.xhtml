@@ -6,53 +6,62 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Kontsultatu transakzioak</title></h:head>
+<h:head><title>Kontsultatu transakzioak</title>
+    <link rel="stylesheet" href="css/trans.css" />
+</h:head>
 <h:body>
-<h:outputText value="#{driver.posta}"/>
-<br></br>
+<div class="trans-container">
 
-<h:outputText value="#{driver.money}">
-    <f:convertNumber type="number" maxFractionDigits="2" />
-</h:outputText>€
-<h:form>
-<h3>Kontsultatu transakzioak</h3>
+    <div class="trans-header">
+        <span>#{driver.posta}</span>
+        <span class="money">
+            <h:outputText value="#{driver.money}">
+                <f:convertNumber type="number" maxFractionDigits="2" />
+            </h:outputText> €
+        </span>
+    </div>
 
-<p>
-<h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
-</p>
+    <h:form>
+        <h3>Kontsultatu transakzioak</h3>
 
-
-
-<p:dataTable id="taula" value="#{tranad.transak}" var="tr" 
-             emptyMessage="Ez dago transakziorik.">
-
-    <p:column headerText="Data">
-        #{tr.date}
-    </p:column>
-    
-     <p:column headerText="Zenbatekoa">
-    <h:outputText value="#{tr.money}">
-        <f:convertNumber type="number" minFractionDigits="2" maxFractionDigits="2" />
-    </h:outputText>€
-	</p:column>
-
-    <p:column headerText="Guztira">
-    <h:outputText value="#{tr.totalMoney}">
-        <f:convertNumber type="number" minFractionDigits="2" maxFractionDigits="2" />
-    </h:outputText>€
-	</p:column>
+        <div class="trans-actions">
+    <h:commandButton value="Itzuli"
+                     action="#{driver.itzuli}"
+                     immediate="true"
+                     styleClass="btn-secondary-link" />
+</div>
 
 
-    <p:column headerText="Kontzeptua">
-        #{tr.concept}
-    </p:column>
-    
-   
-    
-   
+        <p:dataTable id="taula" value="#{tranad.transak}" var="tr" 
+                     emptyMessage="Ez dago transakziorik.">
 
-</p:dataTable>
-</h:form>
+            <p:column headerText="Data">
+                #{tr.date}
+            </p:column>
+
+            <p:column headerText="Zenbatekoa">
+                <h:outputText value="#{tr.money}">
+                    <f:convertNumber type="number" minFractionDigits="2" maxFractionDigits="2" />
+                </h:outputText> €
+            </p:column>
+
+            <p:column headerText="Guztira">
+                <h:outputText value="#{tr.totalMoney}">
+                    <f:convertNumber type="number" minFractionDigits="2" maxFractionDigits="2" />
+                </h:outputText> €
+            </p:column>
+
+            <p:column headerText="Kontzeptua">
+                #{tr.concept}
+            </p:column>
+
+        </p:dataTable>
+
+        <h:messages id="msgs" globalOnly="true" infoClass="info" errorClass="error" />
+
+    </h:form>
+</div>
 </h:body>
+
 </f:view>
 </html>

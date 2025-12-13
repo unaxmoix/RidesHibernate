@@ -38,7 +38,6 @@ public class TranaTBean implements Serializable{
 	
 	
 	public List<Transaction> getTransak() {
-		System.out.println("bebe");
 		return transak;
 	}
 

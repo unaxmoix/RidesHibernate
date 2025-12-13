@@ -1,0 +1,184 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #f4f5f7;
+    margin: 0;
+    color: #333;
+}
+
+.query-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px 40px;
+    border-bottom: 1px solid #ddd;
+    position: relative; 
+}
+.money-box {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+
+    font-weight: bold;
+    color: #666;
+    font-size: 1.1em;
+}
+
+
+h3 {
+    margin: 0 0 18px 0;
+    font-size: 20px;
+}
+
+.reserva-actions .btn-secondary-link,
+.reserva-actions input[type="submit"].btn-secondary-link {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    color: #888;
+    font-size: 0.85em;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.reserva-actions .btn-secondary-link:hover,
+.reserva-actions input[type="submit"].btn-secondary-link:hover {
+    color: #555; 
+    text-decoration: none;
+}
+
+.top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.top-info .email {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.top-info .money {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #777;
+}
+
+.ui-datatable {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 0.9em;
+}
+
+.ui-datatable th {
+    background-color: #f4f5f7;
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.ui-datatable td {
+    padding: 6px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.ui-datatable .ui-datatable-empty-message {
+    padding: 12px;
+    color: #777;
+    font-style: italic;
+}
+
+.ui-datatable .ui-button {
+    background-color: #d9534f;
+    border: none;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 0.85em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.ui-datatable .ui-button:hover {
+    background-color: #c9302c;
+}
+
+.error,
+.ui-message-error,
+.ui-messages-error {
+    color: #d9534f;
+    font-size: 0.85em;
+}
+
+.info,
+.ui-messages-info,
+.ui-messages-info * {
+    color: #2e7d32 !important;
+}
+
+.ui-messages-info .ui-icon,
+.ui-messages-info .ui-messages-info-icon,
+.ui-messages-info .ui-icon-info {
+    display: none !important;
+    background: none !important;
+}
+
+.ui-messages-info .ui-messages-info-summary,
+.ui-messages-info .ui-messages-info-detail {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+.ui-messages-info {
+    font-size: 0.9em;
+    background: #e8f5e9 !important;
+    border: 1px solid #c8e6c9 !important;
+    padding: 8px 12px !important;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ui-messages-info::before {
+    content: "✔";
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.ui-messages-warn,
+.ui-messages-warn * {
+    color: #856404 !important;
+}
+
+.ui-messages-warn .ui-icon,
+.ui-messages-warn .ui-messages-warn-icon,
+.ui-messages-warn .ui-icon-warn {
+    display: none !important;
+    background: none !important;
+}
+
+.ui-messages-warn {
+    font-size: 0.9em;
+    background: #fff3cd !important;
+    border: 1px solid #ffeeba !important;
+    padding: 8px 12px !important;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ui-messages-warn::before {
+    content: "⚠";
+    color: #856404;
+    font-weight: bold;
+    font-size: 1em;
+}

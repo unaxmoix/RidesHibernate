@@ -1,64 +1,88 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Sortu bidaia</title></h:head>
+<h:head>
+    <title>Sortu bidaia</title>
+      <link rel="stylesheet" href="css/create.css" />
+  
+</h:head>
 <h:body>
-<h:form>
-<h3>Sortu bidaia</h3>
-<table>
-<tr>
-<td>Nondik:</td>
-<td><h:inputText id="nondik" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{create.nondik}" validatorMessage="[i] Izen baliogabea.">
-<f:validateRegex pattern="^([A-Za-z0-9-]+)$"/>
-</h:inputText></td>
-<td><h:message for="nondik" style="color:red" /></td>
+<div class="reserva-container">
+    <h:form>
+        <h3>Sortu bidaia</h3>
+        <table>
+            <tr>
+                <td>Nondik:</td>
+                <td>
+                    <h:inputText id="nondik" required="true" value="#{create.nondik}" 
+                                 requiredMessage="Ezin da hutsa izan."
+                                 validatorMessage="Izen baliogabea.">
+                        <f:validateRegex pattern="^([A-Za-z0-9-]+)$"/>
+                    </h:inputText>
+                </td>
+                <td><p:message for="nondik" styleClass="error"/></td>
+            </tr>
+            <tr>
+                <td>Nora:</td>
+                <td>
+                    <h:inputText id="nora" required="true" value="#{create.nora}" 
+                                 requiredMessage="Ezin da hutsa izan."
+                                 validatorMessage="Izen baliogabea.">
+                        <f:validateRegex pattern="^([a-zA-Z]+[0-9]?)$"/>
+                    </h:inputText>
+                </td>
+                <td><p:message for="nora" styleClass="error"/></td>
+            </tr>
+            <tr>
+                <td>Eserleku kopurua:</td>
+                <td>
+                    <h:inputText id="eserKop" required="true" value="#{create.eserKop}" 
+                                 requiredMessage="Ezin da hutsa izan." 
+                                 validatorMessage="Sartu zenbaki oso positibo bat!">
+                        <f:validateRegex pattern="^[0-9]+$"/>
+                    </h:inputText>
+                </td>
+                <td><p:message for="eserKop" styleClass="error"/></td>
+            </tr>
+            <tr>
+                <td>Prezioa:</td>
+                <td>
+                    <h:inputText id="prezioa" required="true" value="#{create.prezioa}" 
+                                 requiredMessage="Ezin da hutsa izan." 
+                                 validatorMessage="Sartu zenbaki positibo bat!">
+                        <f:validateRegex pattern="^[0-9]+([.,][0-9]+)?$"/>
+                    </h:inputText>
+                </td>
+                <td><p:message for="prezioa" styleClass="error"/></td>
+            </tr>
+            <tr>
+    <td>Data:</td>
+    <td>
+        <p:calendar id="data" value="#{create.data}" required="true" 
+                    requiredMessage="Ezin da hutsa izan." 
+                    navigator="false" mode="popup" mindate="#{create.bihar}"/>
+    </td>
+    <td>
+        <p:message for="data" styleClass="error"/>
+    </td>
 </tr>
-<tr>
-<td>Nora:</td>
-<td><h:inputText id="nora" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{create.nora}"  validatorMessage="[i] Izen baliogabea.">
-<f:validateRegex pattern="^(([a-z]|[A-Z])+[0-9]?)$"/>
+        </table>
 
-</h:inputText></td>
-<td><h:message for="nora" style="color:red" /></td>
-</tr>
-<tr>
-<td>Eserleku kopurua:</td>
-<td><h:inputText id="eserKop" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{create.eserKop}"  validatorMessage="[i] Sartu zenbaki oso positibo bat!">
-<f:validateRegex pattern="^[0-9]+$"/>
-</h:inputText></td>
-<td><h:message for="eserKop" style="color:red" /></td>
-</tr>
-<tr>
-<td>Prezioa:</td>
-<td><h:inputText id="prezioa" value="#{create.prezioa}"  required="true" requiredMessage="[i] Ezin da hutsa izan." validatorMessage="[i] Sartu zenbaki positibo bat!">
-<f:validateRegex pattern="^[0-9]+([.,][0-9]+)?$"/>
-</h:inputText></td>
-<td><h:message for="prezioa" style="color:red" /></td>
-</tr>
-<tr>
-<td>Data:</td>
-<td><p:calendar id="data" value="#{create.data}" required="true" requiredMessage="[i] Ezin da hutsa izan." navigator="false" mode="popup" mindate="#{create.bihar}">
+        <div class="reserva-actions">
+            <p:commandButton value="Sortu" actionListener="#{create.createRide}" 
+                             update="@form" styleClass="btn-primary"/>
+            <h:commandButton value="Itzuli" action="#{driver.itzuli}" 
+                             immediate="true" styleClass="btn-secondary-link"/>
+        </div>
 
-</p:calendar></td>
-
-</tr>
-</table>
-<tr>
-<p:commandButton value="Sortu" actionListener="#{create.createRide}" update="@form" />
-
-</tr>
-<tr>
-<p>
-<h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
-</p>
-</tr>
- <h:messages id="msgs" globalOnly="true" style="color:green;" />
-</h:form>
+        <p:messages id="msgs" globalOnly="true" styleClass="info"/>
+    </h:form>
+</div>
 </h:body>
 </f:view>
 </html>

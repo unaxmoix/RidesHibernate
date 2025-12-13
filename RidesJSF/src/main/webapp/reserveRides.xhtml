@@ -1,113 +1,125 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
 <f:view>
-<h:head><title>Erreserbatu bidaiak</title></h:head>
+<h:head>
+    <title>Erreserbatu bidaiak</title>
+    <link rel="stylesheet" href="css/reserve.css" />
+</h:head>
+
 <h:body>
+<div class="reserva-container">
+
+    <div class="top-info">
+        <span class="email">
+            <h:outputText value="#{reserve.posta}"/>
+        </span>
+
+        <h:panelGroup id="moneyPanel">
+    <span class="money">
+        <h:outputText value="#{reserve.tot}">
+            <f:convertNumber type="number" maxFractionDigits="2"/>
+        </h:outputText>€
+    </span>
+</h:panelGroup>
+
+    </div>
 
 <h:form>
-<h:outputText value="#{reserve.posta}"/>
-<br></br>
-<h:outputText value="#{reserve.tot}">
-    <f:convertNumber type="number" maxFractionDigits="2" />
-</h:outputText>€
-<br></br>
+
 <h3>Erreserbatu bidaiak</h3>
+
 <table>
 <tr>
 <td>Nondik:</td>
 <td>
-<p:selectOneMenu id="nondik" value="#{reserve.departCity}" action="#{reserve.refresh}" required="true"
-                 requiredMessage="[i] Aukera baliogabea.">
+<p:selectOneMenu id="nondik" value="#{reserve.departCity}" required="true"
+                 requiredMessage="Aukera baliogabea.">
     <f:selectItem itemLabel="-- Aukeratu --" itemValue="" noSelectionOption="true" />
     <f:selectItems value="#{reserve.departCities}" var="x"
                    itemLabel="#{x}" itemValue="#{x}" />
-    <p:ajax event="change"
-            listener="#{reserve.refresh}"
-            update="nora" />
+    <p:ajax event="change" listener="#{reserve.refresh}" update="nora"/>
 </p:selectOneMenu>
-<h:message for="nondik" style="color:red" />
+<p:message for="nondik" styleClass="error"/>
 </td>
 </tr>
-<br></br>
-<br></br>
+
 <tr>
 <td>Nora:</td>
 <td>
 <p:selectOneMenu id="nora" value="#{reserve.destCity}" required="true"
-                 requiredMessage="[i] Aukera baliogabea.">
+                 requiredMessage="Aukera baliogabea.">
     <f:selectItem itemLabel="-- Aukeratu --" itemValue="" noSelectionOption="true" />
     <f:selectItems value="#{reserve.destCities}" var="x"
                    itemLabel="#{x}" itemValue="#{x}" />
-     <p:ajax event="valueChange" listener="#{reserve.refresh}" update="nora" />
 </p:selectOneMenu>
-<h:message for="nora" style="color:red" />
+<p:message for="nora" styleClass="error"/>
 </td>
 </tr>
+
 <tr>
 <td>Eserleku kopurua:</td>
-<td><h:inputText id="eserKop" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{reserve.places}"  validatorMessage="[i] Sartu zenbaki oso positibo bat!">
-<f:validateRegex pattern="^[0-9]+$"/>
-</h:inputText></td>
-<td><h:message for="eserKop" style="color:red" /></td>
+<td>
+<p:inputText id="eserKop" value="#{reserve.places}" required="true"
+             requiredMessage="Ezin da hutsa izan."
+             validatorMessage="Sartu zenbaki oso positibo bat!">
+    <f:validateRegex pattern="^[0-9]+$"/>
+</p:inputText>
+<p:message for="eserKop" styleClass="error"/>
+</td>
 </tr>
+
 <tr>
 <td>Data:</td>
-<td><p:calendar id="data" value="#{reserve.data}" required="true" requiredMessage="[i] Ezin da hutsa izan." navigator="false" mode="popup" mindate="#{reserve.bihar}">
-
-</p:calendar></td>
-
+<td>
+<p:calendar id="data" value="#{reserve.data}" required="true"
+            requiredMessage="Ezin da hutsa izan."
+            mode="popup" navigator="false"
+            mindate="#{reserve.bihar}"/>
+<p:message for="data" styleClass="error"/>
+</td>
 </tr>
 </table>
-<p:commandButton value="Bilatu" actionListener="#{reserve.getRides}" update="@form" />
-<p>
-<h:commandButton value="Itzuli" action="#{traveler.itzuli}" immediate="true"/>
-</p>
+        <div class="reserva-actions">
 
-<h:messages id="msgs" globalOnly="true" style="color:green;" />
+<p:commandButton value="Bilatu" actionListener="#{reserve.getRides}" update="@form"/>
 
+<br></br>
+<h:commandButton
+    value="Itzuli"
+    action="#{traveler.itzuli}"
+    immediate="true"
+    styleClass="btn-secondary-link"/>
+</div>
 
-<p:dataTable id="taula" value="#{reserve.ridesList}" var="r" 
+<p:messages id="msgs" globalOnly="true"  infoClass="info" errorClass="error"  />
+
+<p:dataTable id="taula" value="#{reserve.ridesList}" var="r"
              emptyMessage="Ez dago bidaiarik baldintza horiekin.">
 
-    <p:column headerText="Noiz">
-        #{r.date}
-    </p:column>
-    
-    <p:column headerText="Nondik">
-        #{r.froma}
+    <p:column headerText="Noiz">#{r.date}</p:column>
+    <p:column headerText="Nondik">#{r.froma}</p:column>
+    <p:column headerText="Nora">#{r.toa}</p:column>
+    <p:column headerText="Eserlekuak">#{r.nPlaces}</p:column>
+    <p:column headerText="Prezioa">#{r.price}</p:column>
+    <p:column headerText="Gidaria">#{r.driver.email}</p:column>
+
+    <p:column>
+        <p:commandButton value="Erreserbatu 🎟️"
+                 actionListener="#{reserve.reserveRide(r)}"
+                 update="@form :moneyPanel"
+                 process="@this"/>
     </p:column>
 
-    <p:column headerText="Nora">
-        #{r.toa}
-    </p:column>
-
-    <p:column headerText="Eserleku libreak">
-        #{r.nPlaces}
-    </p:column>
-    
-     <p:column headerText="Prezioa">
-        #{r.price}
-    </p:column>
-    
-    <p:column headerText="Gidaria">
-        #{r.driver.email}
-    </p:column>
-	<p:column headerText="">
-    <p:commandButton 
-        value="Erreserbatu 🎟️" 
-        actionListener="#{reserve.reserveRide(r)}"
-        update="@form"
-        process="@this" />
-	</p:column>
 </p:dataTable>
 
 </h:form>
-
+</div>
 </h:body>
 </f:view>
 </html>

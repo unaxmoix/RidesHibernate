@@ -1,0 +1,269 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #f4f5f7;
+    margin: 0;
+    color: #333;
+}
+
+input[type="submit"].btn-secondary-link {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    color: #888;
+    font-size: 0.85em;
+    padding: 0;
+    text-decoration: underline;
+}
+
+input[type="submit"].btn-secondary-link:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+input[type="submit"].btn-secondary-link:focus,
+input[type="submit"].btn-secondary-link:active {
+    background: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.reserva-container {
+    max-width: 1500px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px 40px;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.top-info .email {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.top-info .money {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #777;
+}
+
+h3 {
+    margin: 10px 0 20px;
+    font-size: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+td {
+    padding: 6px 10px 6px 0;
+    vertical-align: middle;
+}
+
+input[type="text"],
+.ui-selectonemenu,
+.ui-selectonemenu-label,
+.ui-calendar input {
+    width: 100% !important;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.ui-selectonemenu {
+    display: flex;
+    align-items: center;
+}
+
+.ui-calendar {
+    width: 100%;
+}
+
+.ui-message {
+    white-space: nowrap;
+    font-size: 0.85em;
+    color: #d9534f;
+}
+
+.ui-message-error-icon {
+    display: none;
+}
+
+.ui-commandbutton,
+input[type="submit"] {
+    background-color: #007ad9;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.ui-commandbutton:hover,
+input[type="submit"]:hover {
+    background-color: #005fa3;
+}
+
+input[value="Itzuli"] {
+    background: none;
+    color: #888;
+    text-decoration: underline;
+    padding: 0;
+    margin-top: 10px;
+}
+
+input[value="Itzuli"]:hover {
+    color: #555;
+}
+
+.ui-datatable {
+    margin-top: 25px;
+    font-size: 0.9em;
+}
+
+.ui-datatable thead th {
+    background: #f4f5f7;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+}
+
+.ui-datatable tbody td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.ui-datatable .ui-commandbutton {
+    font-size: 0.85em;
+    padding: 6px 12px;
+}
+
+.reserva-container > form table td:last-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ui-datatable-empty-message td {
+    display: table-cell !important;
+    text-align: left;
+    font-style: italic;
+    color: #777;
+    padding: 15px;
+}
+
+td:last-child input[type="text"],
+td:last-child .ui-selectonemenu,
+td:last-child .ui-calendar {
+    flex: 1;
+}
+
+.ui-message {
+    white-space: nowrap;
+    font-size: 0.85em;
+    color: #d9534f;
+    margin-left: 6px;
+}
+
+.ui-message-error-icon {
+    display: none;
+}
+
+td input[type="text"],
+td .ui-selectonemenu,
+td .ui-calendar {
+    flex: 1;
+}
+
+.ui-message {
+    white-space: nowrap;
+    font-size: 0.85em;
+    color: #d9534f;
+    margin-left: 8px;
+}
+
+.ui-message-error-icon {
+    display: none;
+}
+
+.ui-messages-info,
+.ui-messages-info * {
+    color: #2e7d32 !important;
+    font-size: 1.0em;
+}
+
+.ui-messages-info .ui-icon,
+.ui-messages-info .ui-messages-info-icon,
+.ui-icon-info {
+    display: none !important;
+    background: none !important;
+}
+
+.ui-messages-info .ui-messages-info-summary,
+.ui-messages-info .ui-messages-info-detail {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+.ui-messages-info {
+    background: #e8f5e9 !important;
+    border: 1px solid #c8e6c9 !important;
+    padding: 9px 13px !important;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ui-messages-info::before {
+    content: "✔";
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 1.0em;
+}
+
+.ui-messages-warn,
+.ui-messages-warn * {
+    color: #856404 !important;
+}
+
+.ui-messages-warn .ui-icon,
+.ui-messages-warn .ui-messages-warn-icon,
+.ui-icon-warn {
+    display: none !important;
+    background: none !important;
+}
+
+.ui-messages-warn {
+    font-size: 1em;
+    background: #fff3cd !important;
+    border: 1px solid #ffeeba !important;
+    padding: 8px 12px !important;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ui-messages-warn::before {
+    content: "⚠";
+    color: #856404;
+    font-weight: bold;
+    font-size: 1em;
+}

@@ -92,9 +92,9 @@ public class FinishBean implements Serializable{
 			tot=driver.getMoney();
 			ridesList=driver.getPastRides();
 			LoginBean.setDd(driver);
-		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Bidaia bukatu da: "+ r.toString()+" | Irabaziak: "+r.getIrabaziak()+"€", null));
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia bukatu da: "+ r.toString()+" | Irabaziak: "+r.getIrabaziak()+"€", null));
 		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Kudeatu gabeko erreserbak dituzu! ", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Kudeatu gabeko erreserbak dituzu! ", null));
 
 		}
 		

@@ -1,41 +1,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
 <f:view>
-<h:head><title>Atera dirua</title></h:head>
+<h:head>
+    <title>Atera dirua</title>
+    <link rel="stylesheet" href="css/money.css" />
+</h:head>
 
 <h:body>
-<h:outputText value="#{driver.posta}"/>
-<br></br>
 
-<h:outputText value="#{driver.money}">
-    <f:convertNumber type="number" maxFractionDigits="2" />
-</h:outputText>€
+<div class="money-container">
 
-<h:form>
+    <h:panelGroup id="moneyHeader" layout="block" styleClass="money-header">
+        <span>#{driver.posta}</span>
+        <span class="amount">
+            <h:outputText value="#{driver.money}">
+                <f:convertNumber type="number" maxFractionDigits="2" />
+            </h:outputText> €
+        </span>
+    </h:panelGroup>
 
-<tr>
-<td>Atera nahi duzun diru kopurua:</td>
-<td><h:inputText id="diru" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{diruaD.money}"  validatorMessage="[i] Sartu zenbaki positibo bat!">
-<f:validateRegex pattern="^[0-9]+([.][0-9]+)?$"/>
-</h:inputText></td>
-<td><h:message for="diru" style="color:red" /></td>
-</tr>
-<p>
-<h:commandButton value="Atera dirua" action="#{diruaD.ateraDirua}"/>
+    <h:form class="money-form">
 
-</p>
-<tr>
-<p>
-<h:commandButton value="Itzuli" action="#{diruaD.itzuli}" immediate="true"/>
-</p>
-</tr>
-<h:messages id="msgs" globalOnly="true" style="color:green;" />
-</h:form>
+        <table>
+            <tr>
+                <td>Atera nahi duzun diru kopurua:</td>
+                <td>
+                    <h:inputText id="diru"
+                                 value="#{diruaD.money}"
+                                 required="true"
+                                 requiredMessage=" Ezin da hutsa izan."
+                                 validatorMessage=" Sartu zenbaki positibo bat.">
+                        <f:validateRegex pattern="^[0-9]+([.][0-9]+)?$"/>
+                    </h:inputText>
+                </td>
+                <td>
+                    <p:message for="diru" styleClass="error"/>
+                </td>
+            </tr>
+        </table>
+
+        <div class="money-actions">
+            <p:commandButton value="Atera dirua"
+                             action="#{diruaD.ateraDirua}"
+                             update="@form moneyHeader"
+                             styleClass="btn-primary" />
+
+            <p:commandButton value="Itzuli"
+                             action="#{diruaD.itzuli}"
+                             immediate="true"
+                             styleClass="btn-secondary-link" />
+        </div>
+
+        <p:messages id="msgs" globalOnly="true" />
+
+    </h:form>
+
+</div>
+
 </h:body>
 </f:view>
 </html>

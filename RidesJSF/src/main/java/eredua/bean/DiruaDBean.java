@@ -48,7 +48,7 @@ public class DiruaDBean implements Serializable{
 	
 	public void ateraDirua() {
 		if(dd.getMoney()<Double.parseDouble(money)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ez duzu diru nahikorik", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Ez duzu diru nahikorik", null));
 		}else {
 			facadeBL.sartuDiruaD(Double.parseDouble("-"+money), dd);
 			Driver teta=facadeBL.badagoDriver(dd.getEmail());
@@ -57,7 +57,7 @@ public class DiruaDBean implements Serializable{
 			LoginBean.setDd(teta);
 			dd=teta;
 			tot=teta.getMoney();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Ateratako dirua: "+ money + "€", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ateratako dirua: "+ money + "€", null));
 		}
 		
 	}

@@ -32,7 +32,6 @@ public class BalErBean implements Serializable{
     private String erTit;
     private String erDesk;
 	public BalErBean() {
-		System.out.println("Berriro...");
 		traveler=LoginBean.getTt();
 		reservesList= facadeBL.getAllErreserbakT(traveler,true);
 		
@@ -127,16 +126,16 @@ public class BalErBean implements Serializable{
 			 traveler=facadeBL.badagoTraveler(traveler.getEmail());
 			 LoginBean.setTt(traveler);
 			 reservesList= facadeBL.getAllErreserbakT(traveler,true);
-			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Erreklamazioa bidali da. ", null));
+			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreklamazioa bidali da. ", null));
    
 		}else if(e.isEginda() && e.isOnartua() ) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Erreklamazioa arrakastarekin ebatzi da jada.", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreklamazioa arrakastarekin ebatzi da jada.", null));
 
 		}else if(e.isEginda() && !e.isOnartua() ) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Erreklamazioa arrakastarik gabe ebatzi da jada.", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreklamazioa arrakastarik gabe ebatzi da jada.", null));
 
 		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Erreklamazioak berrikuspen-egoeran jarraitzen du.", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreklamazioak berrikuspen-egoeran jarraitzen du.", null));
 
 		}
 	   

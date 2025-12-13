@@ -55,10 +55,10 @@ public class QueryReservesBean implements Serializable{
 			tot=traveler.getMoney();
 			Transaction t= new Transaction(er.getPlaces()*er.getRide().getPrice(),traveler.getMoney(),"Erreserbaren dirua itzuli da.");
 			facadeBL.addTransactionT(t, traveler);
-		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Erreserba bertan behera utzi da.", null));
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreserba bertan behera utzi da.", null));
 
 		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Erreserba dagoeneko onartuta dago. ", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreserba dagoeneko onartuta dago. ", null));
 
 		}
 	}

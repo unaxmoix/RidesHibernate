@@ -6,31 +6,60 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Gidari</title></h:head>
+<h:head><title>Gidari</title>
+    <link rel="stylesheet" href="css/menu.css" />
+</h:head>
 <h:body>
-<h:outputText value="#{driver.posta}"/>
-<br></br>
-<h:outputText value="#{driver.money}">
-    <f:convertNumber type="number" maxFractionDigits="2" />
-</h:outputText>€
 
-<h:form>
-<h3>Aukeratu egitekoa:</h3>
-<p>
-<h:commandButton value="Sortu bidaia" action="#{create.create}"/>
-<h:commandButton value="Kudeatu bidaiak" action="#{query.query}" />
-<h:commandButton value="Atera dirua" action="#{diruaD.diruaD}" />
-<h:commandButton value="Kontsultatu transakzioak" action="#{tranad.tranad}" />
-<h:commandButton value="Kudeatu erreserbak" action="#{manage.manage}" />
-<h:commandButton value="Bukatu bidaiak" action="#{finish.finish}" />
-<h:commandButton value="Balorazioak eta erreklamazioak" action="#{konbaler.konbaler}" />
-</p>
-<tr>
-<p>
-<h:commandButton value="Saioa itxi" action="#{login.logout}" immediate="true"/>
-</p>
-</tr>
-</h:form>
+<div class="menu-container">
+
+    <div class="user-bar">
+        <span>#{driver.posta}</span>
+
+        <div class="money-area">
+            <span class="money">
+                <h:outputText value="#{driver.money}">
+                    <f:convertNumber type="number" maxFractionDigits="2" />
+                </h:outputText> €
+            </span>
+
+            <div class="money-actions">
+                <h:form style="margin:0" class="withdraw-btn">
+                    <h:commandButton value="Atera dirua" action="#{diruaD.diruaD}" />
+                </h:form>
+
+                <h:form style="margin:0">
+                    <h:commandButton value="Mugimenduak" action="#{tranad.tranad}" />
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+    <h:form>
+
+        <h3>Aukeratu egitekoa:</h3>
+
+        <div class="menu-grid">
+            <h:commandButton value="Sortu bidaia" action="#{create.create}" />
+            <h:commandButton value="Kudeatu bidaiak" action="#{query.query}" />
+            <h:commandButton value="Kudeatu erreserbak" action="#{manage.manage}" />
+            <h:commandButton value="Bukatu bidaiak" action="#{finish.finish}" />
+            <h:commandButton value="Balorazioak eta erreklamazioak" action="#{konbaler.konbaler}" />
+        </div>
+
+        <div class="logout">
+    <h:commandLink value="Saioa itxi"
+                   action="#{login.logout}"
+                   immediate="true"
+                   styleClass="logout-link" />
+</div>
+
+
+    </h:form>
+
+</div>
+
 </h:body>
+
 </f:view>
 </html>

@@ -6,21 +6,26 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Kudeatu erreserbak</title></h:head>
+<h:head><title>Kudeatu erreserbak</title>
+    <link rel="stylesheet" href="css/mReserves.css" />
+</h:head>
 <h:body>
+<div class="query-container">
 
 <h:form>
 <h:outputText value="#{manage.posta}"/>
 <br></br>
 <h3>Kudeatu erreserbak</h3>
 
-<p>
-<h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
-</p>
-<h:messages id="msgs" globalOnly="true" style="color:green;" />
+
+<div class="query-actions">
+            <h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"
+                             styleClass="btn-secondary-link" />
+        </div>
+<p:messages id="msgs" globalOnly="true"  infoClass="info" errorClass="error"  />
 
 
-<h3>🟢 Onartua | 🟠 Onartu gabea</h3>
+<h3>🟢 Onartua 🟠 Onartu gabea</h3>
 
 
 <p:dataTable id="taula" value="#{manage.reservesList}" var="er" 
@@ -67,6 +72,7 @@ xmlns:p="http://primefaces.org/ui">
 
 </p:dataTable>
 </h:form>
+</div>
 </h:body>
 </f:view>
 </html>

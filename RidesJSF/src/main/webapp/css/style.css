@@ -1,0 +1,197 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+
+body {
+    background-color: #f4f5f7;
+}
+
+h3 {
+    margin: 0 0 15px 0;
+    font-size: 20px;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding: 6px 10px 6px 0;
+    vertical-align: middle;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 220px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #007ad9;
+    outline: none;
+}
+
+.ui-selectoneradio {
+    margin-top: 12px;
+}
+
+.ui-selectoneradio label {
+    margin-right: 18px;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.btn-primary {
+    background-color: #007ad9;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #005fa3;
+}
+
+.btn-secondary-link {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+
+.ui-button.btn-secondary-link .ui-button-text {
+    color: #888 !important;
+    font-size: 0.85em;
+    padding: 0 !important;
+}
+
+.ui-button.btn-secondary-link:hover .ui-button-text {
+    color: #555 !important;
+    text-decoration: underline;
+}
+
+.ui-message-error,
+.ui-messages-error {
+    color: #d9534f;
+    font-size: 0.85em;
+}
+
+.money-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.withdraw-btn input[type="submit"] {
+    background-color: #007ad9;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    cursor: pointer;
+}
+
+.withdraw-btn input[type="submit"]:hover {
+    background-color: #005fa3;
+}
+
+#msgs {
+    margin-top: 12px;
+}
+
+.ui-messages-info,
+.ui-messages-info * {
+    color: #2e7d32 !important;
+}
+
+.ui-messages-info .ui-icon,
+.ui-messages-info .ui-messages-info-icon,
+.ui-messages-info .ui-icon-info {
+    display: none !important;
+    background: none !important;
+}
+
+.ui-messages-info .ui-messages-info-summary,
+.ui-messages-info .ui-messages-info-detail {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+.ui-messages-info {
+    font-size: 0.9em;
+    background: #e8f5e9 !important;
+    border: 1px solid #c8e6c9 !important;
+    padding: 8px 12px !important;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ui-messages-info::before {
+    content: "✔";
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.ui-messages-warn,
+.ui-messages-warn * {
+    color: #856404 !important;
+}
+
+.ui-messages-warn .ui-icon,
+.ui-messages-warn .ui-messages-warn-icon,
+.ui-messages-warn .ui-icon-warn {
+    display: none !important;
+    background: none !important;
+}
+
+.ui-messages-warn .ui-messages-warn-summary,
+.ui-messages-warn .ui-messages-warn-detail {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+.ui-messages-warn {
+    font-size: 0.9em;
+    background: #fff3cd !important;
+    border: 1px solid #ffeeba !important;
+    padding: 8px 12px !important;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ui-messages-warn::before {
+    content: "⚠";
+    color: #856404;
+    font-weight: bold;
+    font-size: 1em;
+}

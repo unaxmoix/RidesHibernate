@@ -6,95 +6,110 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Baloratu edo erreklamatu bidaiak</title></h:head>
+<h:head><title>Baloratu edo erreklamatu bidaiak</title>
+    <link rel="stylesheet" href="css/baler.css" />
+</h:head>
 <h:body>
 
 <h:form id="mainForm">
-<h:outputText value="#{queryreserve.posta}"/>
-<br></br>
-<h:outputText value="#{queryreserve.tot}">
-    <f:convertNumber type="number" maxFractionDigits="2" />
-</h:outputText>€
-<br></br>
-<h3>Baloratu edo erreklamatu bidaiak</h3>
 
-<p>
-<h:commandButton value="Itzuli" action="#{traveler.itzuli}" immediate="true"/>
-</p>
-<h:messages id="msgs" globalOnly="true" style="color:green;" />
+    <div class="query-container">
 
-<h3>Erreklamazioaren egoera: 
-    <span>🟦 Berrikusten</span> — 
-    <span>🟩 Onartua</span> — 
-    <span>🟥 Baztertuta</span> — 
-    <span>⬜ Egin gabe</span>
-</h3>
+        <div class="top-info">
+            <div class="email">
+                #{queryreserve.posta}
+            </div>
+
+            <div class="money">
+                <h:outputText value="#{queryreserve.tot}">
+                    <f:convertNumber type="number" maxFractionDigits="2" />
+                </h:outputText>€
+            </div>
+        </div>
+
+        <h3>Baloratu edo erreklamatu bidaiak</h3>
+
+        <div class="query-actions">
+            <h:commandButton value="Itzuli"
+                             action="#{traveler.itzuli}"
+                             immediate="true"
+                             styleClass="btn-secondary-link"/>
+        </div>
+
+<p:messages id="msgs" globalOnly="true"  infoClass="info" errorClass="error"  />
+
+        <div class="status-legend">
+    <span class="legend-item review">Berrikusten</span>
+    <span class="legend-item ok">Onartua</span>
+    <span class="legend-item reject">Baztertuta</span>
+    <span class="legend-item none">Egin gabe</span>
+</div>
 
 
+        <p:dataTable id="taula"
+                     value="#{baler.reservesList}"
+                     var="er"
+                     emptyMessage="Ez duzu bukatutako erreserbarik.">
 
+            <p:column headerText="Noiz" sortBy="#{er.ride.date}">
+                #{er.ride.date}
+            </p:column>
 
-<p:dataTable id="taula" value="#{baler.reservesList}" var="er" 
-             emptyMessage="Ez duzu erreserbarik.">
+            <p:column headerText="Nondik">
+                #{er.ride.froma}
+            </p:column>
 
-    <p:column headerText="Noiz" sortBy="#{er.ride.date}">
-        #{er.ride.date}
-    </p:column>
-    
-    <p:column headerText="Nondik">
-        #{er.ride.froma}
-    </p:column>
+            <p:column headerText="Nora">
+                #{er.ride.toa}
+            </p:column>
 
-    <p:column headerText="Nora">
-        #{er.ride.toa}
-    </p:column>
+            <p:column headerText="Eserlekuak">
+                #{er.places}
+            </p:column>
 
-    <p:column headerText="Eserleku kopurua">
-        #{er.places}
-    </p:column>
-    
-    <p:column headerText="Prezioa">
-    <h:outputText value="#{er.ride.price * er.places}">
-        <f:convertNumber type="number" maxFractionDigits="2" />
-    </h:outputText>€
+            <p:column headerText="Prezioa">
+                <h:outputText value="#{er.ride.price * er.places}">
+                    <f:convertNumber type="number" maxFractionDigits="2" />
+                </h:outputText> €
+            </p:column>
+
+            <p:column headerText="Balorazioa">
+                <p:rating value="#{er.bal}"
+                          stars="5"
+                          cancel="false">
+                    <p:ajax event="rate"
+                            listener="#{baler.baloratu(er)}"/>
+                </p:rating>
+            </p:column>
+
+            <p:column style="width: 180px; text-align: center;">
+    <p:commandButton value="Erreklamatu"
+                 styleClass="btn-rekl"
+                 oncomplete="PF('reklDialog').show();"
+                 actionListener="#{baler.erreklamatu(er)}"
+                 update="formReklDialog"/>
+
 </p:column>
-     
-    <p:column headerText="Balorazioa">
-    <p:rating 
-    value="#{er.bal}"
-    stars="5"
-    cancel="false">
 
-    <p:ajax event="rate"
-            listener="#{baler.baloratu(er)}"
-            />
-</p:rating>
-</p:column>
-<p:column headerText="">
-    <p:commandButton value="Erreklamazioa jarri💸" 
-                     icon="pi pi-exclamation-circle"
-                     oncomplete="PF('reklDialog').show();" 
-                     actionListener="#{baler.erreklamatu(er)}"
-                     update="formReklDialog"/>
-</p:column>
 
- <p:column headerText="">
-    <h:outputText value="
-        #{er.err eq 'berrikusten' ? '🟦' :
-           er.err eq 'onartua' ? '🟩' :
-           er.err eq 'baztertuta' ? '🟥' : 
-           '⬜'}" />
-</p:column>
+            <p:column styleClass="status-col">
+                <h:outputText value="
+                    #{er.err eq 'berrikusten' ? '🟦' :
+                       er.err eq 'onartua' ? '🟩' :
+                       er.err eq 'baztertuta' ? '🟥' : '⬜'}"/>
+            </p:column>
 
-</p:dataTable>
+        </p:dataTable>
 
+    </div>
 </h:form>
+
 <p:dialog id="reklDialog"
           header="Erreklamazioa"
           widgetVar="reklDialog"
           modal="true"
           resizable="false"
-          width="500"
-          height="350">
+          width="500">
 
     <h:form id="formReklDialog">
 
@@ -102,20 +117,23 @@ xmlns:p="http://primefaces.org/ui">
             <h:outputLabel value="Arrazoia"/>
             <h:inputText value="#{baler.erTit}" required="true"/>
 
-            <h:outputLabel value="Deskribapena:"/>
-            <h:inputTextarea value="#{baler.erDesk}" rows="5" cols="25" required="true"/>
+            <h:outputLabel value="Deskribapena"/>
+            <h:inputTextarea value="#{baler.erDesk}"
+                             rows="5"
+                             required="true"/>
         </h:panelGrid>
 
-        <br/>
-
-        <p:commandButton value="Bidali" 
-                         actionListener="#{baler.erBidali}"
-                         update=":mainForm:msgs :mainForm:taula"
-                         oncomplete="PF('reklDialog').hide();"/>
+        <div class="dialog-actions">
+            <p:commandButton value="Bidali"
+                             actionListener="#{baler.erBidali}"
+                             update=":mainForm:msgs :mainForm:taula"
+                             oncomplete="PF('reklDialog').hide();"/>
+        </div>
 
     </h:form>
-
 </p:dialog>
+
 </h:body>
+
 </f:view>
 </html>

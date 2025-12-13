@@ -6,22 +6,29 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Bukatu bidaiak</title></h:head>
+<h:head><title>Bukatu bidaiak</title>
+    <link rel="stylesheet" href="css/query.css" />
+</h:head>
 <h:body>
 
+<div class="query-container">
 <h:form>
 <h:outputText value="#{finish.posta}"/>
 <br></br>
-<h:outputText value="#{finish.tot}">
-    <f:convertNumber type="number" maxFractionDigits="2" />
-</h:outputText>€
+<div class="money-box">
+    <h:outputText value="#{finish.tot}">
+        <f:convertNumber type="number" maxFractionDigits="2" />
+    </h:outputText> €
+</div>
+
 <br></br>
 <h3>Bukatu bidaiak</h3>
 
-<p>
-<h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"/>
-</p>
-<h:messages id="msgs" globalOnly="true" style="color:green;" />
+<div class="reserva-actions">
+            <h:commandButton value="Itzuli" action="#{driver.itzuli}" immediate="true"
+                             styleClass="btn-secondary-link" />
+        </div>
+<p:messages id="msgs" globalOnly="true"  infoClass="info" errorClass="error"  />
 
 
 
@@ -57,6 +64,7 @@ xmlns:p="http://primefaces.org/ui">
 
 </p:dataTable>
 </h:form>
+</div>
 </h:body>
 </f:view>
 </html>

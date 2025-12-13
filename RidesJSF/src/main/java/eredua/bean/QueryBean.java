@@ -86,13 +86,13 @@ public class QueryBean implements Serializable{
 	
 	public void removeRide(Ride r) {
 		if(facadeBL.erreserbaDauka(r)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ezin da ezabatu bidaia, erreserbak dauzka. ", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Ezin da ezabatu bidaia, erreserbak dauzka. ", null));
 		}else {
 			facadeBL.removeRide(r.getRideNumber()+"");
 			driver=facadeBL.badagoDriver(driver.getEmail());
 			LoginBean.setDd(driver);
 			ridesList=driver.getRides();
-		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Bidaia ezabatu da.", null));
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia ezabatu da.", null));
 
 
 		}

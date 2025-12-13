@@ -48,17 +48,17 @@ public class SignInBean implements Serializable{
 			if (facadeBL.badagoDriver(this.posta)==null) {
 				Driver d = new Driver(this.posta, this.pasahitza);
 				facadeBL.createDriver(d);
-			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Gidari kontua sortu da: "+ posta, null));
+			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gidari kontua sortu da: "+ posta, null));
 			}else {
-				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Posta elektronikoa jada existitzen da Gidaria motarako!", null));
+				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Posta elektronikoa jada existitzen da Gidaria motarako!", null));
 			}
 		}else if(mota.equals("Bidaiaria")) {
 			if (facadeBL.badagoTraveler(this.posta)==null) {
 				Traveler t = new Traveler(this.posta, this.pasahitza);
 				facadeBL.createTraveler(t);
-			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Bidaiari kontua sortu da: "+ posta, null));
+			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaiari kontua sortu da: "+ posta, null));
 			}else {
-				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Posta elektronikoa jada existitzen da Bidaiaria motarako!", null));
+				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Posta elektronikoa jada existitzen da Bidaiaria motarako!", null));
 			}
 		}
 	}

@@ -44,7 +44,7 @@ public class ManageReservesBean implements Serializable{
 	public void accept(Erreserba er) {
 		if(!er.isOnartua()) {
 			if(er.getRide().getnPlaces()<er.getPlaces()) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Ez daude eserleku nahikorik. Baztertu erreserba. ", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Ez daude eserleku nahikorik. Baztertu erreserba. ", null));
 
 			}else {
 				facadeBL.erreserbaOnartu(er);
@@ -52,12 +52,12 @@ public class ManageReservesBean implements Serializable{
 				driver=facadeBL.badagoDriver(driver.getEmail());
 				Ride r = driver.obtainRide(er.getRide().getRideNumber());
 				LoginBean.setDd(driver);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Erreserba onartu da.", null));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreserba onartu da.", null));
 			}
 			
 
 		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Erreserba dagoeneko onartuta dago. ", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreserba dagoeneko onartuta dago. ", null));
 
 		}
 	}
@@ -67,10 +67,10 @@ public class ManageReservesBean implements Serializable{
 			reservesList= facadeBL.getAllErreserbakD(driver);
 			Transaction t= new Transaction(er.getPlaces()*er.getRide().getPrice(),facadeBL.badagoTraveler(er.getTraveler().getEmail()).getMoney(),"Erreserba baztertu eta dirua itzuli da.");
 			facadeBL.addTransactionT(t, er.getTraveler());
-		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[✔] Erreserba baztertu da.", null));
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreserba baztertu da.", null));
 
 		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Erreserba dagoeneko onartuta dago. ", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreserba dagoeneko onartuta dago. ", null));
 
 		}
 	}

@@ -50,11 +50,11 @@ public class LoginBean implements Serializable{
 					dd=d;
 					return "gidarimenu";
 				}else {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Pasahitz okerra!", null));
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Pasahitz okerra!", null));
 					
 				}
 			}else {
-				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Posta elektronikoa ez dago erregistratuta Gidaria motarako!", null));
+				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Posta elektronikoa ez dago erregistratuta Gidaria motarako!", null));
 			}
 			
 		}else if (this.mota.equals("Bidaiaria")) {
@@ -64,11 +64,11 @@ public class LoginBean implements Serializable{
 					tt=t;
 					return "bidaiarimenu";
 				}else {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Pasahitz okerra!", null));
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Pasahitz okerra!", null));
 					
 				}
 			}else {
-				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "[⚠️] Posta elektronikoa ez dago erregistratuta Bidaiaria motarako!", null));
+				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Posta elektronikoa ez dago erregistratuta Bidaiaria motarako!", null));
 			}
 		}
 		return null;

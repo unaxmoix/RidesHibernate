@@ -6,30 +6,59 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Menua</title></h:head>
-
+<h:head><title>Bidaiari</title>
+    <link rel="stylesheet" href="css/menu.css" />
+</h:head>
 <h:body>
-<h:outputText value="#{traveler.posta}"/> 
-<br></br>
-<h:outputText value="#{traveler.money}">
-    <f:convertNumber type="number" maxFractionDigits="2" />
-</h:outputText>€     
 
-<h:form>
-<h3>Aukeratu egitekoa:</h3>
-<p>
-<h:commandButton value="Erreserbatu bidaiak" action="#{reserve.reserve}" />
-<h:commandButton value="Sartu dirua" action="#{diruat.diruat}" />
-<h:commandButton value="Kontsultatu transakzioak" action="#{tranat.tranat}" />
-<h:commandButton value="Kontsultatu erreserbak" action="#{queryreserve.queryreserve}" />
-<h:commandButton value="Baloratu edo erreklamatu erreserbak" action="#{baler.baler}" />
-</p>
-<tr>
-<p>
-<h:commandButton value="Saioa itxi" action="#{login.logout}" immediate="true"/>
-</p>
-</tr>
-</h:form>
+<div class="menu-container">
+
+    <div class="user-bar">
+    <span>#{traveler.posta}</span>
+
+    <div class="money-area">
+        <span class="money">
+            <h:outputText value="#{traveler.money}">
+                <f:convertNumber type="number" maxFractionDigits="2" />
+            </h:outputText> €
+        </span>
+
+        <div class="money-actions" >
+            <h:form style="margin:0" class="withdraw-btn">
+                <h:commandButton value="Sartu dirua" action="#{diruat.diruat}" />
+            </h:form>
+
+            <h:form style="margin:0">
+                <h:commandButton value="Mugimenduak" action="#{tranat.tranat}" />
+            </h:form>
+        </div>
+    </div>
+</div>
+
+
+    <h:form>
+
+        <h3>Aukeratu egitekoa:</h3>
+
+        <div class="menu-grid">
+            <h:commandButton value="Erreserbatu bidaiak" action="#{reserve.reserve}" />
+            <h:commandButton value="Kudeatu erreserbak" action="#{queryreserve.queryreserve}" />
+            <h:commandButton value="Baloratu edo erreklamatu erreserbak" action="#{baler.baler}" />
+        </div>
+
+        <div class="logout">
+    <h:commandLink value="Saioa itxi"
+                   action="#{login.logout}"
+                   immediate="true"
+                   styleClass="logout-link" />
+</div>
+
+
+    </h:form>
+
+</div>
+
 </h:body>
+
 </f:view>
 </html>

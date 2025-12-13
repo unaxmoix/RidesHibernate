@@ -1,51 +1,81 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
 <f:view>
-<h:head><title>Saioa hasi</title></h:head>
+<h:head>
+    <title>Saioa hasi</title>
+    <link rel="stylesheet" href="css/style.css" />
+</h:head>
+
 <h:body>
+
+<div class="page-center">
 <h:form>
-<h3>Saioa hasi</h3>
-<table>
-<tr>
-<td>Posta:</td>
-<td><h:inputText id="posta" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{login.posta}" validatorMessage="[i] Posta baliogabea.">
-<f:validateRegex pattern="^[A-Za-z0-9.]+@[A-Za-z0-9.]+\.[A-Za-z]{1,}$"/>
-</h:inputText></td>
-<td><h:message for="posta" style="color:red" /></td>
-</tr>
-<tr>
-<td>Pasahitza:</td>
-<td><h:inputSecret  id="pasahitza" required="true" requiredMessage="[i] Ezin da hutsa izan." value="#{login.pasahitza}"  validatorMessage="[i] Pasahitza baliogabea.">
 
-</h:inputSecret>
-<h:message for="pasahitza" style="color:red" />
-</td>
-</tr>
-</table>
-<br></br>
-<p:selectOneRadio id="rol" value="#{login.mota}" required="true" requiredMessage="[i] Aukeratu kontu mota bat.">
-    <f:selectItem itemLabel="Gidaria" itemValue="Gidaria"/>
-    <f:selectItem itemLabel="Bidaiaria" itemValue="Bidaiaria"/>
-</p:selectOneRadio>
+    <h3>Saioa hasi</h3>
 
-<h:message for="rol" style="color:red"/>
+    <table>
+        <tr>
+            <td>Posta:</td>
+            <td>
+                <h:inputText id="posta"
+                             value="#{login.posta}"
+                             required="true"
+                             requiredMessage=" Ezin da hutsa izan."
+                             validatorMessage=" Posta baliogabea.">
+                    <f:validateRegex pattern="^[A-Za-z0-9.]+@[A-Za-z0-9.]+\.[A-Za-z]{1,}$"/>
+                </h:inputText>
+            </td>
+            <td><p:message for="posta" styleClass="error"/></td>
+        </tr>
 
-<br/><br/>
-<tr>
-<p:commandButton value="Saioa hasi" action="#{login.login}" update="@form" />
-</tr>
-<tr>
-<p>
-<h:commandButton value="Ez duzu konturik?" action="#{login.signIn}" immediate="true"/>
-</p>
-</tr>
- <h:messages id="msgs" globalOnly="true" style="color:red;" />
+        <tr>
+            <td>Pasahitza:</td>
+            <td>
+                <h:inputSecret id="pasahitza"
+                               value="#{login.pasahitza}"
+                               required="true"
+                               requiredMessage=" Ezin da hutsa izan."
+                               validatorMessage=" Pasahitza baliogabea."/>
+            </td>
+            <td><p:message for="pasahitza" styleClass="error"/></td>
+        </tr>
+    </table>
+
+    <p:selectOneRadio id="rol"
+                      value="#{login.mota}"
+                      required="true"
+                      requiredMessage=" Aukeratu kontu mota bat.">
+        <f:selectItem itemLabel="Gidaria" itemValue="Gidaria"/>
+        <f:selectItem itemLabel="Bidaiaria" itemValue="Bidaiaria"/>
+    </p:selectOneRadio>
+
+    <p:message for="rol" styleClass="error"/>
+
+    <div class="actions">
+        <p:commandButton
+            value="Saioa hasi"
+            action="#{login.login}"
+            update="@form"
+            styleClass="btn-primary" />
+
+        <p:commandButton
+            value="Ez duzu konturik?"
+            action="#{login.signIn}"
+            immediate="true"
+            styleClass="btn-secondary-link" />
+    </div>
+
+    <p:messages id="msgs" globalOnly="true" styleClass="error"/>
+
 </h:form>
+</div>
+
 </h:body>
 </f:view>
 </html>

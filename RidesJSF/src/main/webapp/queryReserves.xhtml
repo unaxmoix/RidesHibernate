@@ -6,24 +6,38 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <f:view>
-<h:head><title>Kontsultatu erreserbak</title></h:head>
+<h:head><title>Kontsultatu erreserbak</title>
+    <link rel="stylesheet" href="css/query.css" />
+</h:head>
 <h:body>
 
+<div class="query-container">
+    <div class="top-info">
+        <span class="email">
+            <h:outputText value="#{queryreserve.posta}"/>
+        </span>
+
+        <h:panelGroup id="moneyPanel">
+    <span class="money">
+        <h:outputText value="#{queryreserve.tot}">
+            <f:convertNumber type="number" maxFractionDigits="2"/>
+        </h:outputText>€
+    </span>
+</h:panelGroup>
+
+    </div>
 <h:form>
-<h:outputText value="#{queryreserve.posta}"/>
-<br></br>
-<h:outputText value="#{queryreserve.tot}">
-    <f:convertNumber type="number" maxFractionDigits="2" />
-</h:outputText>€
-<br></br>
+
 <h3>Kontsultatu erreserbak</h3>
 
-<p>
-<h:commandButton value="Itzuli" action="#{traveler.itzuli}" immediate="true"/>
-</p>
-<h:messages id="msgs" globalOnly="true" style="color:green;" />
+<div class="reserva-actions">
+            <h:commandButton value="Itzuli" action="#{traveler.itzuli}" immediate="true"
+                             styleClass="btn-secondary-link" />
+        </div>
 
-<h3>🟢 Onartua | 🟠 Onartu gabea</h3>
+<p:messages id="msgs" globalOnly="true" infoClass="info" errorClass="error" />
+
+<h3>🟢 Onartua 🟠 Onartu gabea</h3>
 
 
 
@@ -54,15 +68,16 @@ xmlns:p="http://primefaces.org/ui">
     </p:column>
     <p:column headerText="">
     <p:commandButton 
-        value="Bertan behera ❌" 
+        value="Bertan behera" 
         actionListener="#{queryreserve.removeReserve(er)}"
-        update="@form"
+        update="@form :moneyPanel"
         process="@this" />
 	</p:column>
  
 
 </p:dataTable>
 </h:form>
+</div>
 </h:body>
 </f:view>
 </html>
